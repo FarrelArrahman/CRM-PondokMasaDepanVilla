@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Periode extends Model
+class Pertanyaan extends Model
 {
     use HasFactory;
 
-    protected $table = 'tb_periode';
-    protected $primaryKey = 'id_periode';
+    protected $table = 'tb_pertanyaan';
+    protected $primaryKey = 'id_pertanyaan';
     public $timestamps = false;
 
     /**
@@ -19,11 +19,13 @@ class Periode extends Model
      * @var array
      */
     protected $fillable = [
-        'nama_periode',
-        'tahun_periode',
-        'tgl_mulai',
-        'tgl_selesai',
-        'status'
+        'id_periode',
+        'id_user',
+        'tgl_input',
+        'pertanyaan',
+        'pilih_baik',
+        'pilih_cukup',
+        'pilih_buruk',
     ];
 
     /**

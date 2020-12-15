@@ -13,6 +13,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('layouts.template');
+        return view('admin.dashboard.index');
     }
 }

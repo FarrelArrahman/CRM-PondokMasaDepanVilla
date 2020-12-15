@@ -28,13 +28,13 @@
                         <p>User</p>
                     </a>
                 </li>
-                <li class="nav-item {{ (request()->is('*respondent*')) ? 'active' : '' }}">
+                <li class="nav-item {{ (request()->is('*responden*')) ? 'active' : '' }}">
                     <a href="#" class="collapsed" aria-expanded="false">
                         <i class="fas fa-users"></i>
                         <p>Responden</p>
                     </a>
                 </li>
-                <li class="nav-item {{ (request()->is('*questions*')) ? 'active' : '' }}">
+                <li class="nav-item {{ (request()->is('*pertanyaan*')) ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#pertanyaan" class="collapsed" aria-expanded="false">
                         <i class="fas fa-question"></i>
                         <p>Pertanyaan</p>

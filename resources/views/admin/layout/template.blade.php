@@ -10,6 +10,13 @@
         .bg-red {
             background: #E74C3C;
         }
+
+        .page-item.active .page-link {
+            z-index:1;
+            color:#fff;
+            background-color:#E74C3C!important;
+            border-color:#E74C3C!important;
+        }
     </style>
 
     <!-- Fonts and icons -->
@@ -23,7 +30,7 @@
                 "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular",
                     "Font Awesome 5 Brands", "simple-line-icons"
                 ],
-                urls: ['../css/fonts.min.css']
+                urls: ['{{ asset("css/fonts.min.css") }}']
             },
             active: function() {
                 sessionStorage.fonts = true;
@@ -35,8 +42,6 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/atlantis.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
     @stack('top')
 </head>
 
@@ -47,7 +52,8 @@
             <div class="logo-header" data-background-color="dark2">
 
                 <a href="#" class="logo">
-                    <img src="{{ asset('e-voting-logo.png') }}" width="150" alt="navbar brand" class="navbar-brand">
+
+                <img src="{{ asset('e-voting-logo.png') }}" width="150" alt="logo" class="navbar-brand">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,16 +128,6 @@
 
     <!-- Atlantis JS -->
     <script src="{{ asset('js/atlantis.min.js') }}"></script>
-
-    <!-- TinyMCE -->
-    <script src="https://cdn.tiny.cloud/1/fj1sd5pr1zffp0z6w6hmryrqbo9bh2ldx0rjomsunhaz712q/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script type="text/javascript">
-        tinymce.init({
-            selector:'textarea',
-            plugins: 'lists',
-            toolbar: 'numlist bullist'
-        });
-    </script>
     @yield('js')
 
     @stack('bottom')

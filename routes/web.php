@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard.index');
+Route::prefix('admin')->group(function() {
+    Route::resource('/', App\Http\Controllers\DashboardController::class);
+    Route::resource('pertanyaan', App\Http\Controllers\PertanyaanController::class);
+    Route::resource('periode', App\Http\Controllers\PeriodeController::class);    
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
