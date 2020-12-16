@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="{{ asset('img/logo-mcos.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('logo.jpg') }}" type="image/x-icon" />
     <style>
         .bg-red {
             background: #E74C3C;
@@ -52,8 +52,7 @@
             <div class="logo-header" data-background-color="dark2">
 
                 <a href="#" class="logo">
-
-                <img src="{{ asset('e-voting-logo.png') }}" width="150" alt="logo" class="navbar-brand">
+                    <img src="{{ asset('logo.jpg') }}" width="80" alt="logo" class="navbar-brand">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,4 +130,5 @@
     @yield('js')
 
     @stack('bottom')
+</body>
 </html>

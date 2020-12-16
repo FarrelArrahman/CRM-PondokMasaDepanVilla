@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('jenis_kel');
             $table->string('alamat');
             $table->string('status');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
         });
     }
 

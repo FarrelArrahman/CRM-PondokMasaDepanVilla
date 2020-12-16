@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('admin')->group(function() {
-    Route::resource('/', App\Http\Controllers\DashboardController::class);
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
+    Route::resource('user', App\Http\Controllers\UserController::class);
+    Route::resource('periode', App\Http\Controllers\PeriodeController::class);
     Route::resource('pertanyaan', App\Http\Controllers\PertanyaanController::class);
-    Route::resource('periode', App\Http\Controllers\PeriodeController::class);    
 });
 
 Auth::routes();
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -14,7 +14,10 @@ class PeriodeController extends Controller
      */
     public function index()
     {
-        return view('admin.periode.index');
+        $periode = Periode::all();
+        return view('admin.periode.index', [
+            'periode' => $periode,
+        ]);
     }
 
     /**
@@ -46,17 +49,16 @@ class PeriodeController extends Controller
         );
         
         $periode = Periode::create($validated);
-
-        return redirect()->route('pertanyaan.index');
+        return redirect()->route('admin.periode.index')->with(['message' => 'Data berhasil ditambahkan.', 'status' => 'success']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Periode  $periode
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Periode $periode)
     {
         //
     }
@@ -64,34 +66,46 @@ class PeriodeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Periode  $periode
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Periode $periode)
     {
-        //
+        return view('admin.periode.edit', ['periode' => $periode]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Periode  $periode
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Periode $periode)
     {
-        //
+        $validated = $request->validate(
+            [
+                'nama_periode'  => 'required',
+                'tahun_periode' => 'required',
+                'tgl_mulai'     => 'required|date',
+                'tgl_selesai'   => 'required|date',
+                'status'        => 'required',
+            ]
+        );
+
+        $periode->update($validated);
+        return redirect()->route('admin.periode.index')->with(['message' => 'Data berhasil diubah.', 'status' => 'success']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Periode  $periode
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Periode $periode)
     {
-        //
+        $periode->delete();
+        return redirect()->route('admin.periode.index')->with(['message' => 'Data berhasil dihapus.', 'status' => 'success']);
     }
 }

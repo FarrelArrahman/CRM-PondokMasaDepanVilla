@@ -4,10 +4,10 @@
 <div class="page-inner py-5">
     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
         <div>
-            <h2 class="text-white pb-2 fw-bold">Data Periode</h2>
+            <h2 class="text-white pb-2 fw-bold">Data User</h2>
         </div>
         <div class="ml-md-auto py-2 py-md-0">
-            <a href="{{ route('admin.periode.create') }}" class="btn btn-dark btn-round mr-2">Tambah Periode</a>
+            <a href="{{ route('admin.user.create') }}" class="btn btn-dark btn-round mr-2">Tambah User</a>
         </div>
     </div>
 </div>
@@ -23,37 +23,37 @@
     <div class="col-md-12">
         <div class="card full-height">
             <div class="card-body">
-                <div class="card-title">Daftar Periode</div>
-                <div class="card-category">Berisi periode.</div>
+                <div class="card-title">Daftar User</div>
+                <div class="card-category">Berisi user yang dapat melakukan login pada sistem.</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nama Periode</th>
-                                    <th>Tahun Periode</th>
-                                    <th>Tanggal Mulai</th>
-                                    <th>Tanggal Selesai</th>
+                                    <th>Nama User</th>
+                                    <th>Email</th>
+                                    <th>No Hp</th>
+                                    <th>Jenis Kelamin</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>    
-                            @foreach($periode as $item)
+                            @foreach($user as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nama_periode }}</td>
-                                    <td>{{ $item->tahun_periode }}</td>
-                                    <td>{{ $item->tgl_mulai->isoFormat('DD MMMM YYYY') }}</td>
-                                    <td>{{ $item->tgl_selesai->isoFormat('DD MMMM YYYY') }}</td>
-                                    <td>{{ ($item->status == 1) ? 'Aktif' : 'Tidak Aktif' }}</td>
+                                    <td>{{ $item->nama_user }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->no_hp }}</td>
+                                    <td>{{ $item->jenis_kel }}</td>
+                                    <td>{{ $item->status }}</td>
                                     <td>
                                         <div class="btn-group">
-                                        <a href="{{ route('admin.periode.edit', $item->id_periode) }}" class="btn btn-warning btn-sm ml-2">
+                                        <a href="{{ route('admin.user.edit', $item->id_user) }}" class="btn btn-warning btn-sm ml-2">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('admin.periode.destroy', $item->id_periode) }}" method="post">
+                                        <form action="{{ route('admin.user.destroy', $item->id_user) }}" method="post">
                                             @method('delete')
                                             @csrf
                                             <button class="btn btn-danger btn-sm ml-2" style="margin-right: 5px;"

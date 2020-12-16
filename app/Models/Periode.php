@@ -12,6 +12,7 @@ class Periode extends Model
     protected $table = 'tb_periode';
     protected $primaryKey = 'id_periode';
     public $timestamps = false;
+    public $dates = ['tgl_mulai', 'tgl_selesai'];
 
     /**
      * The attributes that are mass assignable.
