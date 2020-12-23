@@ -19,9 +19,6 @@ class CreatePertanyaanTable extends Migration
             $table->integer('id_user')->unsigned();
             $table->dateTime('tgl_input');
             $table->text('pertanyaan');
-            $table->string('pilih_baik');
-            $table->string('pilih_cukup');
-            $table->string('pilih_buruk');
 
             // Alter foreign key
             $table->foreign('id_periode')->references('id_periode')->on('tb_periode');

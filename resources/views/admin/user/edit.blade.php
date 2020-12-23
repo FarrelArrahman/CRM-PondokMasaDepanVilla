@@ -18,7 +18,7 @@
                 @csrf
                 @method('PUT')
                 <div class="card-body">
-                    <div class="card-title">Tambah User Baru</div>
+                    <div class="card-title">Ubah Data User</div>
                     <div class="card-category">Silahkan isi form berikut.</div>
                     <div class="card-body">
                         <div class="form-group form-inline">
@@ -78,7 +78,7 @@
                                 <select name="status" class="form-control input-full">
                                     <option value="" selected disabled>Pilih status...</option>
                                     <option @if($user->status == 'admin') {{ 'selected' }} @endif value="admin">Admin</option>
-                                    <option @if($user->status == 'member') {{ 'selected' }} @endif value="member">Member</option>
+                                    <option @if($user->status == 'staff') {{ 'selected' }} @endif value="staff">Staff</option>
                                 </select>
                                 @error('status')
                                     <small class="form-text text-muted text-danger">{{ $message }}</small>

@@ -20,8 +20,11 @@
                             </div>
                         </li>
                         <li>
+                            <form id="logout" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                            <a class="dropdown-item" href="#" onclick="$('#logout').submit()">Logout</a>
                         </li>
                     </div>
                 </ul>

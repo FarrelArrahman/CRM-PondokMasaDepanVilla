@@ -77,7 +77,7 @@
                                 <select name="status" class="form-control input-full">
                                     <option value="" selected disabled>Pilih status...</option>
                                     <option @if(old('status') == 'admin') {{ 'selected' }} @endif value="admin">Admin</option>
-                                    <option @if(old('status') == 'member') {{ 'selected' }} @endif value="member">Member</option>
+                                    <option @if(old('status') == 'staff') {{ 'selected' }} @endif value="member">Staff</option>
                                 </select>
                                 @error('status')
                                     <small class="form-text text-muted text-danger">{{ $message }}</small>

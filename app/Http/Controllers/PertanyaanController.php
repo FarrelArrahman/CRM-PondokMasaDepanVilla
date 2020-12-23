@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pertanyaan;
+use App\Models\Periode;
 
 class PertanyaanController extends Controller
 {
@@ -13,7 +15,10 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
-        return view('admin.pertanyaan.index');
+        $pertanyaan = Pertanyaan::all();
+        return view('admin.pertanyaan.index', [
+            'pertanyaan' => $pertanyaan
+        ]);
     }
 
     /**
@@ -23,7 +28,10 @@ class PertanyaanController extends Controller
      */
     public function create()
     {
-        return view('admin.pertanyaan.add');
+        $periode = Periode::whereStatus(1)->get();
+        return view('admin.pertanyaan.add', [
+            'periode' => $periode,
+        ]);
     }
 
     /**
@@ -34,16 +42,28 @@ class PertanyaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(
+            [
+                'id_periode'    => 'required',
+                'pertanyaan'    => 'required',
+            ]
+        );
+        
+        $pertanyaan = Pertanyaan::create(array_merge($validated, [
+            'id_user'   => auth()->user()->id_user,
+            'tgl_input' => date('Y-m-d'),
+        ]));
+
+        return redirect()->route('admin.pertanyaan.index')->with(['message' => 'Data berhasil ditambahkan.', 'status' => 'success']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pertanyaan $pertanyaan)
     {
         //
     }
@@ -51,33 +71,45 @@ class PertanyaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pertanyaan $pertanyaan)
     {
-        //
+        $periode = Periode::whereStatus(1)->get();
+        return view('admin.pertanyaan.edit', [
+            'pertanyaan' => $pertanyaan,
+            'periode' => $periode,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pertanyaan $pertanyaan)
     {
-        //
+        $validated = $request->validate(
+            [
+                'id_periode'    => 'required',
+                'pertanyaan'    => 'required',
+            ]
+        );
+
+        $pertanyaan->update($validated);
+        return redirect()->route('admin.pertanyaan.index')->with(['message' => 'Data berhasil diubah.', 'status' => 'success']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pertanyaan $pertanyaan)
     {
         //
     }

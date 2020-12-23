@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li class="nav-item {{ (request()->is('*periode*')) ? 'active' : '' }}">
-                    <a href="#" class="collapsed" aria-expanded="false">
+                    <a href="{{ route('admin.periode.index') }}" class="collapsed" aria-expanded="false">
                         <i class="fas fa-calendar"></i>
                         <p>Periode</p>
                     </a>
@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li class="nav-item {{ (request()->is('*pertanyaan*')) ? 'active' : '' }}">
-                    <a href="#pertanyaan" class="collapsed" aria-expanded="false">
+                    <a href="{{ route('admin.pertanyaan.index') }}" class="collapsed" aria-expanded="false">
                         <i class="fas fa-question"></i>
                         <p>Pertanyaan</p>
                     </a>

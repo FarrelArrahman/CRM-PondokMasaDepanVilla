@@ -53,13 +53,6 @@
                                         <a href="{{ route('admin.user.edit', $item->id_user) }}" class="btn btn-warning btn-sm ml-2">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('admin.user.destroy', $item->id_user) }}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger btn-sm ml-2" style="margin-right: 5px;"
-                                                onclick="return confirm('Apakah yakin ingin menghapus?');"><i
-                                                    class="far fa-trash-alt"></i></button>
-                                        </form>
                                         </div>
                                     </td>
                                 </tr>

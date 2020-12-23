@@ -23,9 +23,6 @@ class Pertanyaan extends Model
         'id_user',
         'tgl_input',
         'pertanyaan',
-        'pilih_baik',
-        'pilih_cukup',
-        'pilih_buruk',
     ];
 
     /**
@@ -45,4 +42,14 @@ class Pertanyaan extends Model
     protected $casts = [
         //
     ];
+
+    public function periode()
+    {
+        return $this->hasOne(Periode::class, 'id_periode', 'id_periode');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id_user', 'id_user');
+    }
 }

@@ -20,13 +20,18 @@
             <div class="card-body">
                 <div class="card-title">Tambah Pertanyaan Baru</div>
                 <div class="card-category">Silahkan isi form berikut.</div>
+                <form action="{{ route('admin.pertanyaan.store') }}" method="POST">
                 <div class="card-body">
-                    <form action="{{ route('pertanyaan.store') }}" method="POST">
                         @csrf
                         <div class="form-group form-inline">
                             <label for="inlineinput" class="col-md-2 col-form-label">Pilih Periode</label>
                             <div class="col-md-10 p-0">
-                                <input name="id_periode" type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                <select name="id_periode" class="form-control input-full" id="inlineinput">
+                                    <option value="" disabled selected>Pilih periode...</option>
+                                    @foreach($periode as $item)
+                                    <option value="{{ $item->id_periode }}">{{ $item->tahun_periode }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -36,12 +41,12 @@
                                 <textarea name="pertanyaan" class="form-control input-full" id="inlineinput" placeholder="Masukkan Pertanyaan"></textarea>
                             </div>
                         </div>
-                    </form>
                 </div>
                 <div class="card-action text-center">
                     <button type="submit" class="btn btn-success">Submit</button>
                     <button type="reset" class="btn btn-danger">Cancel</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
