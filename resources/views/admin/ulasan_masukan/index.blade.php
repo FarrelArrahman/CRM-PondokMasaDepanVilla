@@ -4,7 +4,7 @@
 <div class="page-inner py-5">
     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
         <div>
-            <h2 class="text-white pb-2 fw-bold">Data Responden</h2>
+            <h2 class="text-white pb-2 fw-bold">Data Ulasan dan Masukan</h2>
         </div>
     </div>
 </div>
@@ -20,8 +20,8 @@
     <div class="col-md-12">
         <div class="card full-height">
             <div class="card-body">
-                <div class="card-title">Daftar Responden</div>
-                <div class="card-category">Berisi daftar responden yang telah mengisi kuesioner dan ulasan atau masukan.</div>
+                <div class="card-title">Daftar Ulasan dan Masukan</div>
+                <div class="card-category">Berisi daftar ulasan dan masukan yang telah diisi oleh responden.</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
@@ -29,25 +29,25 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nama Responden</th>
-                                    <th>Email</th>
-                                    <th>No Hp</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Status</th>
+                                    <th>Ulasan atau Masukan</th>
+                                    <th>Periode</th>
+                                    <th>Tanggal Input</th>
+                                    <th>Keterangan</th>
                                     <!-- <th>Aksi</th> -->
                                 </tr>
                             </thead>
                             <tbody>    
-                            @foreach($responden as $item)
+                            @foreach($ulasanMasukan as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nama_responden }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    <td>{{ $item->no_hp }}</td>
-                                    <td>{{ $item->jenis_kel }}</td>
-                                    <td>{{ $item->status }}</td>
+                                    <td>{{ $item->responden->nama_responden }}</td>
+                                    <td>{{ $item->ulasan_masukan }}</td>
+                                    <td>{{ $item->periode->tahun_periode }}</td>
+                                    <td>{{ $item->tgl_input }}</td>
+                                    <td>{{ $item->keterangan }}</td>
                                     <!-- <td>
                                         <div class="btn-group">
-                                        <a href="{{ route('admin.responden.edit', $item->id_responden) }}" class="btn btn-warning btn-sm ml-2">
+                                        <a href="{{ route('admin.ulasan.edit', $item->id_ulasan_masukan) }}" class="btn btn-warning btn-sm ml-2">
                                             <i class="far fa-edit"></i>
                                         </a>
                                         </div>
