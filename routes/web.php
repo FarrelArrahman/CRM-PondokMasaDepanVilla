@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Get All Bulan
+Route::get('/get-bulan', [App\Http\Controllers\DashboardController::class, 'bulan'])->name('get-bulan');
+Route::get('/get-responden/{periode}', [App\Http\Controllers\DashboardController::class, 'responden'])->name('get-responden');
+
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
     Route::resource('user', App\Http\Controllers\UserController::class);

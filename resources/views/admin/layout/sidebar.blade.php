@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li class="nav-item {{ (request()->is('*responden*')) ? 'active' : '' }}">
-                    <a href="#" class="collapsed" aria-expanded="false">
+                    <a href="{{ route('admin.responden.index') }}" class="collapsed" aria-expanded="false">
                         <i class="fas fa-users"></i>
                         <p>Responden</p>
                     </a>
@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item {{ (request()->is('*ulasan*')) ? 'active' : '' }}">
-                    <a href="#" class="collapsed" aria-expanded="false">
+                    <a href="{{ route('admin.ulasan.index') }}" class="collapsed" aria-expanded="false">
                         <i class="fas fa-comment"></i>
                         <p>Ulasan</p>
                     </a>

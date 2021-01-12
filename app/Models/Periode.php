@@ -44,4 +44,34 @@ class Periode extends Model
     protected $casts = [
         //
     ];
+
+    /** 
+     * Nama-nama bulan dalam satu tahun.
+     * 
+     * @var array
+    */
+    protected static $bulan = [
+        'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+    ];
+
+    /**
+     * Menampilkan data nama-nama bulan.
+     *
+     * @return array $bulan
+     */
+    public static function getBulan()
+    {
+        return self::$bulan;
+    }
 }
