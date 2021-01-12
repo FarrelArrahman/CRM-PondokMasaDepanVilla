@@ -15,7 +15,10 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
-        $pertanyaan = Pertanyaan::all();
+        $pertanyaan = Pertanyaan::whereHas('periode', function ($query) {
+            return $query->where('status', '1');
+        })->get();
+
         return view('admin.pertanyaan.index', [
             'pertanyaan' => $pertanyaan
         ]);
