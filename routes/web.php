@@ -18,8 +18,12 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('user', App\Http\Controllers\UserController::class);
     Route::resource('periode', App\Http\Controllers\PeriodeController::class);
     Route::resource('pertanyaan', App\Http\Controllers\PertanyaanController::class);
+    Route::resource('responden', App\Http\Controllers\RespondenController::class);
+    Route::resource('ulasan', App\Http\Controllers\UlasanMasukanController::class);
 });
 
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/ulasan', [App\Http\Controllers\HomeController::class, 'ulasan'])->name('ulasan');
+Route::post('/ulasan', [App\Http\Controllers\HomeController::class, 'store'])->name('ulasan.store');
