@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Mamba Bootstrap Template - Index</title>
+    <title>Pondok Masa Depan Villa | Home</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -73,7 +73,7 @@
                     <li class="active"><a href="{{ route('home') }}">Halaman Utama</a></li>
                     <li><a href="#tentang-kami">Tentang Kami</a></li>
                     <li><a href="#aktifitas">Aktifitas</a></li>
-                    <li><a href="#contact">Beri Ulasan</a></li>
+                    <li><a href="{{ route('ulasan') }}">Beri Ulasan</a></li>
                 </ul>
             </nav><!-- .nav-menu -->
 
@@ -264,21 +264,6 @@
             </div>
         </section><!-- End Services Section -->
 
-        <!-- ======= Contact Us Section ======= -->
-        <section id="contact" class="contact">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Beri Ulasan</h2>
-                </div>
-
-                <div class="row">
-
-                </div>
-
-            </div>
-        </section><!-- End Contact Us Section -->
-
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
@@ -334,6 +319,13 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('mamba/assets/js/main.js') }}"></script>
 
+    <!-- Sweetalert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        @if(Session::has('message'))
+            swal("Berhasil", "{{ Session::get('message') }}", "{{ Session::get('status') }}");
+        @endif
+    </script>
 </body>
 
 </html>

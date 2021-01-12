@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Mamba Bootstrap Template - Index</title>
+    <title>Pondok Masa Depan Villa | Beri Ulasan</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -79,9 +79,9 @@
             <nav class="nav-menu float-right d-none d-lg-block">
                 <ul>
                     <li class="active"><a href="{{ route('home') }}">Halaman Utama</a></li>
-                    <li><a href="#tentang-kami">Tentang Kami</a></li>
-                    <li><a href="#aktifitas">Aktifitas</a></li>
-                    <li><a href="#beri-ulasan">Beri Ulasan</a></li>
+                    <li><a href="{{ url('/#tentang-kami') }}">Tentang Kami</a></li>
+                    <li><a href="{{ url('/#aktifitas') }}">Aktifitas</a></li>
+                    <li><a href="{{ route('home') }}">Beri Ulasan</a></li>
                 </ul>
             </nav><!-- .nav-menu -->
 

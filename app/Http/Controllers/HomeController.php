@@ -84,6 +84,6 @@ class HomeController extends Controller
             'keterangan' => '',
         ]);
 
-        return redirect('home')->with(['message' => 'Ulasan telah berhasil terkirim.', 'status' => 'success']);
+        return redirect('/')->with(['message' => 'Ulasan telah berhasil terkirim.', 'status' => 'success']);
     }
 }

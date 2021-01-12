@@ -41,4 +41,16 @@ class HasilKuesioner extends Model
     protected $casts = [
         //
     ];
+
+    public function periode()
+    {
+        return $this->hasOneThrough(
+            Periode::class, 
+            Pertanyaan::class, 
+            'id_pertanyaan', 
+            'id_periode',
+            'id_pertanyaan',
+            'id_periode'
+        );
+    }
 }

@@ -18,7 +18,7 @@
         <div class="card full-height">
             <div class="card-body">
                 <div class="card-title">Statistik</div>
-                <div class="card-category">Informasi grafik pada Sistem Informasi E-voting UKM MCOS</div>
+                <div class="card-category">Informasi grafik pada Villa Pondok Masa Depan</div>
                 <div class="row mt-5">
                     <div class="col-md-12">
                         <form action="" method="POST">
@@ -32,9 +32,17 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-12">
-                        <h3 class="text-center">Jumlah Responden</h3>
+
+                    <div class="col-md-12 text-center">
+                        <h3 class="text-center mb-0">Jumlah Responden</h3>
+                        <small id="title-jumlah-responden" class="text-center mb-5"></small>
                         <canvas id="canvas-jumlah-responden"></canvas>
+                    </div>
+
+                    <div class="col-md-12 text-center mt-5">
+                        <h3 class="text-center mb-0">Hasil Kuesioner</h3>
+                        <small id="title-hasil-kuesioner" class="text-center mb-5"></small>
+                        <canvas id="canvas-hasil-kuesioner"></canvas>
                     </div>
                 </div>
             </div>
@@ -45,21 +53,49 @@
 
 @push('bottom')
 <script>
-    function loadContent() {
+    var colorArray = [
+        '#2ECC71','#E67E22','#F1C40F'
+    ];
+
+    function loadJumlahResponden() {
         var periode = $('#pilih-periode').val();
+
+        var title = $('#title-jumlah-responden').text();
+        $('#title-jumlah-responden').empty();
+        $('#title-jumlah-responden').text("(Periode " + periode + ")");
+
         var url = "{{ route('get-responden', '') }}/" + periode;
         fetch(url).then(response => response.json())
             .then(function(data){
                 // console.log(data);
 
-                setChart(data.bulan, data.responden, data.max);
+                setChartJumlahResponden(data.bulan, data.responden, data.max);
             }).catch(function(e){
                 alert("gagal mengambil data");
             });
             
     }
 
-    function setChart(bulan, responden, max) {
+    function loadHasilKuesioner() {
+        var periode = $('#pilih-periode').val();
+
+        var title = $('#title-hasil-kuesioner').text();
+        $('#title-hasil-kuesioner').empty();
+        $('#title-hasil-kuesioner').text(" (Periode " + periode + ")");
+
+        var url = "{{ route('get-nilai', '') }}/" + periode;
+        fetch(url).then(response => response.json())
+            .then(function(data){
+                // console.log(data);
+
+                setChartHasilKuesioner(data.bulan, data.hasilKuesioner, data.max);
+            }).catch(function(e){
+                console.log(e);
+            });
+            
+    }
+
+    function setChartJumlahResponden(bulan, responden, max) {
         var chartData = {
             labels: bulan,
             datasets: [{
@@ -85,14 +121,45 @@
                 }
             }
         });
+    }
 
-        console.log("ini jalan gan");
+    function setChartHasilKuesioner(bulan, hasilKuesioner, max) {
+        var canvas = document.getElementById('canvas-hasil-kuesioner');
+
+        var myChart = new Chart(canvas, {
+            type: 'bar',
+            data: {
+                labels: bulan,
+                datasets: [],
+            }
+        });
+
+        var i = 0;
+        for(year in hasilKuesioner) {
+            var newDataSet = {
+                label: year,
+                backgroundColor: colorArray[i],
+                data: []
+            }
+
+            for(value in hasilKuesioner[year]) {
+                newDataSet.data.push(hasilKuesioner[year][value]);
+            }
+
+            myChart.config.data.datasets.push(newDataSet);
+            i++;
+        }
+
+        myChart.update();
     }
     
     $(document).ready(function () {
-        loadContent();
+        loadJumlahResponden();
+        loadHasilKuesioner();
+        
         $('#pilih-periode').change(function () {
-            loadContent();
+            loadJumlahResponden();
+            loadHasilKuesioner();
         });
     });
 </script>

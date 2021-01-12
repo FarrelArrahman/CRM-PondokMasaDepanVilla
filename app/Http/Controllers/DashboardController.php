@@ -49,23 +49,65 @@ class DashboardController extends Controller
         $periode = $periode ?? date('Y');
 
         $bulan = Periode::getBulan();
-        $hasil_kuesioner = [];
+        $responden = [];
         $max = 10;
 
         foreach($bulan as $key => $value) {
-            $hasil_kuesioner[$key] = UlasanMasukan::distinct('id_responden')
+            $responden[$key] = UlasanMasukan::distinct('id_responden')
                 ->whereMonth('tgl_input', $key + 1)
                 ->whereYear('tgl_input', $periode)
                 ->count() ?? 0;
-            if($max < $hasil_kuesioner[$key]){
-                $max = $hasil_kuesioner[$key];
+
+            // $responden[$key] = rand(2,50);
+
+            if($max < $responden[$key]){
+                $max = $responden[$key];
             }
         }
 
         return response()->json([
             'status' => 200,
             'bulan' => $bulan,
-            'responden' => $hasil_kuesioner,
+            'responden' => $responden,
+            'max' => $max,
+        ]);
+    }
+
+    /**
+     * Ambil data nilai.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function nilai($periode)
+    {
+        // dd(HasilKuesioner::with('periode')->get());
+        $periode = $periode ?? date('Y');
+
+        $bulan = Periode::getBulan();
+        $range_nilai = [3, 2, 1];
+        $hasil_kuesioner = [];
+        $max = 10;
+
+        foreach($range_nilai as $nilai) {
+            foreach($bulan as $key => $value) {
+                if($nilai == 3) $keterangan = "Baik";
+                else if($nilai == 2) $keterangan = "Cukup";
+                else if($nilai == 1) $keterangan = "Buruk";
+
+                $hasil_kuesioner[$keterangan][$value] = HasilKuesioner::with('periode')
+                    ->whereMonth('tgl_input', $key + 1)
+                    ->whereYear('tgl_input', $periode)
+                    ->where('nilai', $nilai)
+                    ->count();
+
+                // $hasil_kuesioner[$keterangan][$value] = rand(2,50);
+            }
+        }
+
+        return response()->json([
+            'status' => 200,
+            'bulan' => $bulan,
+            'hasilKuesioner' => $hasil_kuesioner,
             'max' => $max,
         ]);
     }

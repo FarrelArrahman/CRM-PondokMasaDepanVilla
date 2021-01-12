@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Get All Bulan
-Route::get('/get-bulan', [App\Http\Controllers\DashboardController::class, 'bulan'])->name('get-bulan');
 Route::get('/get-responden/{periode}', [App\Http\Controllers\DashboardController::class, 'responden'])->name('get-responden');
+Route::get('/get-nilai/{periode}', [App\Http\Controllers\DashboardController::class, 'nilai'])->name('get-nilai');
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
