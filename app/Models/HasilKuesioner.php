@@ -22,6 +22,7 @@ class HasilKuesioner extends Model
         'id_responden',
         'id_pertanyaan',
         'nilai',
+        'tgl_input'
     ];
 
     /**

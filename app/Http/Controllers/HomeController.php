@@ -67,12 +67,13 @@ class HomeController extends Controller
         $data_responden = array_merge($data_responden, ['status' => 'Aktif', 'keterangan' => '']);
 
         $responden = Responden::create($data_responden);
-        
+
         foreach($data_kuesioner as $id_pertanyaan => $nilai) {
             $kuesioner = HasilKuesioner::create([
                 'id_responden' => $responden->id_responden,
                 'id_pertanyaan' => $id_pertanyaan,
                 'nilai' => $nilai,
+                'tgl_input' => date('Y-m-d'),
             ]);
         }
 

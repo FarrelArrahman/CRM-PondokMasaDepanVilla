@@ -8,8 +8,8 @@
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span class="ellipsis">
-                            {{ Auth::user()->nama ?? 'User' }}
-                            <span class="user-level">{{ ucfirst(Auth::user()->role ?? 'Guest') }}</span>
+                            {{ Auth::user()->username ?? 'User' }}
+                            <span class="user-level">{{ ucfirst(Auth::user()->status ?? 'Guest') }}</span>
                         </span>
                     </a>
                     <div class="clearfix"></div>
