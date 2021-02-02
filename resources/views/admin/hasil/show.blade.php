@@ -4,7 +4,7 @@
 <div class="page-inner py-5">
     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
         <div>
-            <h2 class="text-white pb-2 fw-bold">Data Responden</h2>
+            <h2 class="text-white pb-2 fw-bold">Data Penilaian Responden</h2>
         </div>
     </div>
 </div>
@@ -20,38 +20,42 @@
     <div class="col-md-12">
         <div class="card full-height">
             <div class="card-body">
-                <div class="card-title">Daftar Responden</div>
-                <div class="card-category">Berisi daftar responden yang telah mengisi kuesioner dan ulasan atau masukan.</div>
                 <div class="card-body">
+                    <table class="table">
+                    <tr>
+                        <th width="200">Nama Responden</th>
+                        <td>{{ $data_responden->user->nama_user }}</td>
+                    </tr>
+                    <tr>
+                        <th width="200">Periode Kuesioner</th>
+                        <td>{{ $data_responden->periode->tahun_periode }}</td>
+                    </tr>
+                    <tr>
+                        <th width="200">Rata-rata nilai</th>
+                        <td>{{ $nilai }}</td>
+                    </tr>
+                    <tr>
+                        <th width="200">Ulasan responden</th>
+                        <td>{{ $data_responden->ulasan->ulasan_masukan }}</td>
+                    </tr>
+                    </table>
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nama Responden</th>
-                                    <th>Email</th>
-                                    <th>No Hp</th>
-                                    <th>Jenis Kelamin</th>
-                                    <!-- <th>Aksi</th> -->
+                                    <th>Pertanyaan</th>
+                                    <th>Nilai</th>
                                 </tr>
                             </thead>
-                            <tbody>    
-                            @foreach($responden as $item)
+                            <tbody>
+                                @foreach($data_responden->kuesioner as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->user->nama_user }}</td>
-                                    <td>{{ $item->user->email }}</td>
-                                    <td>{{ $item->user->no_hp }}</td>
-                                    <td>{{ $item->user->jenis_kel }}</td>
-                                    <!-- <td>
-                                        <div class="btn-group">
-                                        <a href="{{ route('admin.responden.edit', $item->id_responden) }}" class="btn btn-warning btn-sm ml-2">
-                                            <i class="far fa-edit"></i>
-                                        </a>
-                                        </div>
-                                    </td> -->
+                                    <td>{{ $item->pertanyaan->pertanyaan }}</td>
+                                    <td>{{ $item->nilai }}</td>
                                 </tr>
-                            @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

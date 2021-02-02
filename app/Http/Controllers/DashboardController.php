@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Periode;
 use App\Models\Responden;
+use App\Models\Pertanyaan;
 use App\Models\HasilKuesioner;
 use App\Models\UlasanMasukan;
+use Auth;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        // 
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -17,98 +24,71 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $data_periode = Periode::orderBy('tahun_periode', 'DESC')->get();
+        if(Auth::user()->status == 'responden')
+        return redirect()->route('ulasan');
+        
+        $data_responden = $this->responden()->count();
+
+        $data_pertanyaan = $this->pertanyaan()->count();
+
+        $data_periode = [
+            'total' => Periode::count(),
+            'min' => Periode::orderBy('tahun_periode', 'ASC')->first()->tahun_periode,
+            'max' => Periode::orderBy('tahun_periode', 'DESC')->first()->tahun_periode,
+        ];
+
+        $data_rating = [
+            'avg' => round($this->rating(), 2),
+            'max' => 5,
+        ];
 
         return view('admin.dashboard.index', [
+            'data_responden' => $data_responden,
+            'data_pertanyaan' => $data_pertanyaan,
             'data_periode' => $data_periode,
+            'data_rating' => $data_rating,
         ]);
     }
 
-    /**
-     * Ambil data bulan.
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function bulan()
+    public function rating()
     {
-        $bulan = Periode::getBulan();
+        $rating = 0;
+        
+        foreach($this->responden() as $key => $value) {
+            $nilai = 0;
+            $pertanyaan = [];
 
-        return response()->json([
-            'status' => 200,
-            'data' => $bulan,
-        ]);
-    }
-
-    /**
-     * Ambil data responden.
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function responden($periode)
-    {
-        $periode = $periode ?? date('Y');
-
-        $bulan = Periode::getBulan();
-        $responden = [];
-        $max = 10;
-
-        foreach($bulan as $key => $value) {
-            $responden[$key] = UlasanMasukan::distinct('id_responden')
-                ->whereMonth('tgl_input', $key + 1)
-                ->whereYear('tgl_input', $periode)
-                ->count() ?? 0;
-
-            // $responden[$key] = rand(2,50);
-
-            if($max < $responden[$key]){
-                $max = $responden[$key];
+            foreach($value->kuesioner as $k => $v) {
+                $nilai += $v->nilai;
+                $pertanyaan[] = $v->id_pertanyaan;
             }
+
+            $rating = $nilai / count($pertanyaan);
         }
 
-        return response()->json([
-            'status' => 200,
-            'bulan' => $bulan,
-            'responden' => $responden,
-            'max' => $max,
-        ]);
+        return $rating;
     }
 
-    /**
-     * Ambil data nilai.
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function nilai($periode)
+    public function nilai()
     {
-        // dd(HasilKuesioner::with('periode')->get());
-        $periode = $periode ?? date('Y');
+        $nilai = HasilKuesioner::sum('nilai');
 
-        $bulan = Periode::getBulan();
-        $range_nilai = [3, 2, 1];
-        $hasil_kuesioner = [];
-        $max = 10;
+        return $nilai;
+    }
 
-        foreach($range_nilai as $nilai) {
-            foreach($bulan as $key => $value) {
-                if($nilai == 3) $keterangan = "Baik";
-                else if($nilai == 2) $keterangan = "Cukup";
-                else if($nilai == 1) $keterangan = "Buruk";
+    public function pertanyaan()
+    {
+        $pertanyaan = Pertanyaan::whereHas('periode', function ($query) {
+            $query->where('status', 1);
+        })->get();
 
-                $hasil_kuesioner[$keterangan][$value] = HasilKuesioner::with('periode')
-                    ->whereMonth('tgl_input', $key + 1)
-                    ->whereYear('tgl_input', $periode)
-                    ->where('nilai', $nilai)
-                    ->count();
+        return $pertanyaan;
+    }
 
-                // $hasil_kuesioner[$keterangan][$value] = rand(2,50);
-            }
-        }
+    public function responden()
+    {
+        $responden = Responden::with('kuesioner')->has('kuesioner')->get();
 
-        return response()->json([
-            'status' => 200,
-            'bulan' => $bulan,
-            'hasilKuesioner' => $hasil_kuesioner,
-            'max' => $max,
-        ]);
+        return $responden;
     }
 }

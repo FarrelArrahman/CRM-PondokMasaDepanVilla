@@ -49,10 +49,10 @@
             </div>
             <div class="social-links float-right">
                 <a href="#" class="twitter"><i class="icofont-twitter text-white"></i></a>
-                <a href="#" class="facebook"><i class="icofont-facebook text-white"></i></a>
+                <!-- <a href="#" class="facebook"><i class="icofont-facebook text-white"></i></a> -->
                 <a href="#" class="instagram"><i class="icofont-instagram text-white"></i></a>
-                <a href="#" class="skype"><i class="icofont-skype text-white"></i></a>
-                <a href="#" class="linkedin"><i class="icofont-linkedin text-white"></i></i></a>
+                <!-- <a href="#" class="skype"><i class="icofont-skype text-white"></i></a> -->
+                <!-- <a href="#" class="linkedin"><i class="icofont-linkedin text-white"></i></i></a> -->
             </div>
         </div>
     </section>
@@ -71,9 +71,17 @@
             <nav class="nav-menu float-right d-none d-lg-block">
                 <ul>
                     <li class="active"><a href="{{ route('home') }}">Halaman Utama</a></li>
-                    <li><a href="#tentang-kami">Tentang Kami</a></li>
-                    <li><a href="#aktifitas">Aktifitas</a></li>
+                    <!-- <li><a href="#tentang-kami">Tentang Kami</a></li> -->
+                    <!-- <li><a href="#aktifitas">Aktifitas</a></li> -->
                     <li><a href="{{ route('ulasan') }}">Beri Ulasan</a></li>
+                    @auth
+                    <li>
+                        <form id="logout" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                        <a class="btn btn-danger text-white" href="#" onclick="$('#logout').submit()">Logout</a>
+                    </li>
+                    @endauth
                 </ul>
             </nav><!-- .nav-menu -->
 
@@ -153,7 +161,7 @@
     <main id="main">
 
         <!-- ======= Tentang Kami Section ======= -->
-        <section id="tentang-kami" class="about">
+        <!-- <section id="tentang-kami" class="about">
             <div class="container">
 
                 <div class="row no-gutters">
@@ -176,10 +184,11 @@
                 </div>
 
             </div>
-        </section><!-- End About Us Section -->
+        </section> -->
+        <!-- End About Us Section -->
 
         <!-- ======= Aktifitas Section ======= -->
-        <section id="aktifitas" class="services">
+        <!-- <section id="aktifitas" class="services">
             <div class="container">
 
                 <div class="section-title">
@@ -262,7 +271,8 @@
                 </div>
 
             </div>
-        </section><!-- End Services Section -->
+        </section> -->
+        <!-- End Services Section -->
 
     </main><!-- End #main -->
 

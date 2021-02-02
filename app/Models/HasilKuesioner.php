@@ -54,4 +54,9 @@ class HasilKuesioner extends Model
             'id_periode'
         );
     }
+
+    public function pertanyaan()
+    {
+        return $this->hasOne(Pertanyaan::class, 'id_pertanyaan', 'id_pertanyaan');
+    }
 }

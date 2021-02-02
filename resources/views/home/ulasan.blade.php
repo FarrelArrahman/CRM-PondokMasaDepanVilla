@@ -57,10 +57,10 @@
             </div>
             <div class="social-links float-right">
                 <a href="#" class="twitter"><i class="icofont-twitter text-white"></i></a>
-                <a href="#" class="facebook"><i class="icofont-facebook text-white"></i></a>
+                <!-- <a href="#" class="facebook"><i class="icofont-facebook text-white"></i></a> -->
                 <a href="#" class="instagram"><i class="icofont-instagram text-white"></i></a>
-                <a href="#" class="skype"><i class="icofont-skype text-white"></i></a>
-                <a href="#" class="linkedin"><i class="icofont-linkedin text-white"></i></i></a>
+                <!-- <a href="#" class="skype"><i class="icofont-skype text-white"></i></a> -->
+                <!-- <a href="#" class="linkedin"><i class="icofont-linkedin text-white"></i></i></a> -->
             </div>
         </div>
     </section>
@@ -79,8 +79,8 @@
             <nav class="nav-menu float-right d-none d-lg-block">
                 <ul>
                     <li class="active"><a href="{{ route('home') }}">Halaman Utama</a></li>
-                    <li><a href="{{ url('/#tentang-kami') }}">Tentang Kami</a></li>
-                    <li><a href="{{ url('/#aktifitas') }}">Aktifitas</a></li>
+                    <!-- <li><a href="{{ url('/#tentang-kami') }}">Tentang Kami</a></li> -->
+                    <!-- <li><a href="{{ url('/#aktifitas') }}">Aktifitas</a></li> -->
                     <li><a href="{{ route('home') }}">Beri Ulasan</a></li>
                 </ul>
             </nav><!-- .nav-menu -->
@@ -90,18 +90,19 @@
 
     <main id="main">
         <!-- ======= Beri Ulasan Section ======= -->
+        @if(Auth::check())
         <section id="beri-ulasan" class="contact">
             <div class="container">
 
-                <div class="section-title">
+                <!-- <div class="section-title">
                     <h2>Isi Biodata</h2>
-                </div>
+                </div> -->
 
                 <form action="{{ route('ulasan.store') }}" method="post">
                 <div class="row">
                     <div class="col-lg-12" data-aos="fade-up" data-aos-delay="0">
                             @csrf
-                            <div class="form-row">
+                            <!-- <div class="form-row">
                                 <div class="col-lg-6 form-group">
                                     <label for="name">Nama Lengkap</label>
                                     <input type="text" name="nama_responden" class="form-control" id="name"
@@ -141,9 +142,9 @@
                                 <textarea class="form-control" name="alamat" rows="5" data-rule="required"
                                     data-msg="Please write something for us" placeholder="Alamat"></textarea>
                                 <div class="validate"></div>
-                            </div>
+                            </div> -->
 
-                            <div class="section-title mt-5">
+                            <div class="section-title">
                                 <h2>Kuesioner</h2>
                             </div>
 
@@ -152,29 +153,25 @@
                                     <tr class="text-center">
                                         <th width="10" rowspan="2">No</th>
                                         <th rowspan="2">Pertanyaan</th>
-                                        <th colspan="3">Jawaban</th>
+                                        <th colspan="5">Nilai</th>
                                     </tr>
 
                                     <tr class="text-center">
-                                        <th width="100">Baik</th>
-                                        <th width="100">Cukup</th>
-                                        <th width="100">Buruk</th>
+                                        @for($i = 5; $i >= 1; $i--)
+                                        <th width="70">{{ $i }}</th>
+                                        @endfor
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($pertanyaan as $item)
                                     <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <th class="text-center">{{ $loop->iteration }}</th>
                                         <td>{{ $item->pertanyaan }}</td>
+                                        @for($i = 5; $i >= 1; $i--)
                                         <td class="text-center">
-                                            <input type="radio" class="form-control" name="{{ $item->id_pertanyaan }}" value="3">
+                                            <input type="radio" class="form-control" name="{{ $item->id_pertanyaan }}" value="{{ $i }}">
                                         </td>
-                                        <td class="text-center">
-                                            <input type="radio" class="form-control" name="{{ $item->id_pertanyaan }}" value="2">
-                                        </td>
-                                        <td class="text-center">
-                                            <input type="radio" class="form-control" name="{{ $item->id_pertanyaan }}" value="1">
-                                        </td>
+                                        @endfor
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -200,7 +197,204 @@
                 </form>
 
             </div>
-        </section><!-- End Contact Us Section -->
+        </section>
+        @else
+        <section id="beri-ulasan" class="contact">
+            <div class="container">
+
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="alert alert-info text-center">Anda harus login terlebih dahulu untuk memberikan ulasan.</div>
+                        <ul class="nav nav-pills nav-fill mb-3" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Register</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                                <!-- Form Login -->
+                                <div class="card login">
+                                    <div class="card-body">
+                                        <form method="POST" action="{{ route('login') }}">
+                                            @csrf
+
+                                            <div class="form-group row">
+                                                <label for="username" class="col-md-4 col-form-label text-md-right">Email or Username</label>
+
+                                                <div class="col-md-8">
+                                                    <input id="username" type="text" class="form-control @error('email') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+
+                                                    @error('username')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                                                <div class="col-md-8">
+                                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                                    @error('password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-0">
+                                                <div class="col-md-4 offset-md-4">
+                                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- End Form Login -->
+                            </div>
+                            <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                                <!-- Form Register -->
+                                <div class="card cregister">
+                                    <div class="card-body">
+                                        <form method="POST" action="{{ route('user.responden.store') }}">
+                                            @csrf
+
+                                            <h5 class="card-title text-center mb-4">Biodata Diri</h5>
+
+                                            <input type="hidden" name="status" value="responden">
+
+                                            <div class="form-group row">
+                                                <label for="nama_user" class="col-md-4 col-form-label text-md-right">Nama User</label>
+
+                                                <div class="col-md-8">
+                                                    <input id="nama_user" name="nama_user" type="text" class="form-control @error('nama_user') is-invalid @enderror" placeholder="Masukkan nama user..." value="{{ old('nama_user') }}" required>
+                                                    @error('nama_user')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="no_hp" class="col-md-4 col-form-label text-md-right">No HP</label>
+
+                                                <div class="col-md-8">
+                                                    <input id="no_hp" name="no_hp" type="text" class="form-control @error('no_hp') is-invalid @enderror" placeholder="Masukkan No HP..." value="{{ old('no_hp') }}" required>
+                                                    @error('no_hp')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="jenis_kel" class="col-md-4 col-form-label text-md-right">Jenis Kel</label>
+
+                                                <div class="col-md-8 mt-2">
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input @if(old('jenis_kel') == 'L') {{ 'checked' }} @endif type="radio" class="form-check-input" name="jenis_kel" value="L">Laki-laki
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input @if(old('jenis_kel') == 'P') {{ 'checked' }} @endif type="radio" class="form-check-input" name="jenis_kel" value="P">Perempuan
+                                                        </label>
+                                                    </div>
+                                                    @error('jenis_kel')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="alamat" class="col-md-4 col-form-label text-md-right">Alamat</label>
+
+                                                <div class="col-md-8">
+                                                    <textarea id="alamat" name="alamat" class="form-control @error('alamat') is-invalid @enderror" placeholder="Masukkan Alamat..." required>{{ old('alamat') }}</textarea>
+                                                    @error('alamat')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <h5 class="card-title text-center mt-4 mb-4">Kredensial Login</h5>
+
+                                            <div class="form-group row">
+                                                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+
+                                                <div class="col-md-8">
+                                                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Masukkan email..." required>
+
+                                                    @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
+
+                                                <div class="col-md-8">
+                                                    <input id="username" type="text" class="form-control @error('email') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="Masukkan username..." required>
+
+                                                    @error('username')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                                                <div class="col-md-8">
+                                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Masukkan password..." required>
+
+                                                    @error('password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row mb-0">
+                                                <div class="col-md-4 offset-md-4">
+                                                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- End Form Register -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        @endif
+        <!-- End Contact Us Section -->
 
     </main><!-- End #main -->
 
@@ -256,6 +450,14 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('mamba/assets/js/main.js') }}"></script>
+    <!-- Sweetalert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        @if(Session::has('message'))
+            swal("Berhasil", "{{ Session::get('message') }}", "{{ Session::get('status') }}");
+        @endif
+    </script>
 
 </body>
 

@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Get All Bulan
-Route::get('/get-responden/{periode}', [App\Http\Controllers\DashboardController::class, 'responden'])->name('get-responden');
-Route::get('/get-nilai/{periode}', [App\Http\Controllers\DashboardController::class, 'nilai'])->name('get-nilai');
+Route::get('/get-responden/{periode}', [App\Http\Controllers\HasilController::class, 'responden'])->name('get-responden');
+Route::get('/get-nilai/{periode}', [App\Http\Controllers\HasilController::class, 'nilai'])->name('get-nilai');
+Route::post('/user-responden-store', [App\Http\Controllers\UserController::class, 'store'])->name('user.responden.store');
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
@@ -24,6 +25,8 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('pertanyaan', App\Http\Controllers\PertanyaanController::class);
     Route::resource('responden', App\Http\Controllers\RespondenController::class);
     Route::resource('ulasan', App\Http\Controllers\UlasanMasukanController::class);
+    Route::get('hasil', [App\Http\Controllers\HasilController::class, 'index'])->name('hasil.index');
+    Route::get('hasil/{id_responden}', [App\Http\Controllers\HasilController::class, 'show'])->name('hasil.show');
 });
 
 Auth::routes();

@@ -8,7 +8,7 @@
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span class="ellipsis">
-                            {{ Auth::user()->username ?? 'User' }}
+                            {{ Auth::user()->nama_user ?? 'User' }}
                             <span class="user-level">{{ ucfirst(Auth::user()->status ?? 'Guest') }}</span>
                         </span>
                     </a>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item {{ (request()->is('*hasil*')) ? 'active' : '' }}">
-                    <a href="#hasil" class="collapsed" aria-expanded="false">
+                    <a href="{{ route('admin.hasil.index') }}" class="collapsed" aria-expanded="false">
                         <i class="fas fa-chart-pie"></i>
                         <p>Hasil</p>
                     </a>

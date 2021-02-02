@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        $user = User::whereIn('status', ['admin','staff'])->get();
         return view('admin.user.index', [
             'user' => $user,
         ]);
@@ -50,8 +51,15 @@ class UserController extends Controller
                 'password'  => 'required|min:8',
             ]
         );
+
+        $validated['password'] = bcrypt($request->password);
         
         $user = User::create($validated);
+
+        if(!Auth::check()) {
+            return redirect()->route('ulasan')->with(['message' => 'Akun berhasil dibuat. Anda dapat login dengan menggunakan username atau email dan password Anda.', 'status' => 'success']);
+        }
+
         return redirect()->route('admin.user.index')->with(['message' => 'Data berhasil ditambahkan.', 'status' => 'success']);
     }
 

@@ -19,13 +19,9 @@ class Responden extends Model
      * @var array
      */
     protected $fillable = [
-        'nama_responden',
-        'email',
-        'no_hp',
-        'jenis_kel',
-        'alamat',
-        'status',
-        'keterangan',
+        'id_user',
+        'id_periode',
+        'tgl_input',
     ];
 
     /**
@@ -45,4 +41,24 @@ class Responden extends Model
     protected $casts = [
         //
     ];
+
+    public function kuesioner()
+    {
+        return $this->hasMany(HasilKuesioner::class, 'id_responden');
+    }
+
+    public function ulasan()
+    {
+        return $this->hasOne(UlasanMasukan::class, 'id_responden', 'id_responden');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id_user', 'id_user');
+    }
+
+    public function periode()
+    {
+        return $this->hasOne(Periode::class, 'id_periode', 'id_periode');
+    }
 }

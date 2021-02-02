@@ -57,6 +57,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        $route = (in_array(auth()->user()->status, ['admin','staff'])) ? 'login' : 'home'; 
         $this->performLogout($request);
         return redirect()->route('login');
     }
