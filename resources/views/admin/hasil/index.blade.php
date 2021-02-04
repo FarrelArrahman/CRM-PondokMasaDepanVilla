@@ -79,21 +79,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($data_responden as $item)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->tgl_input }}</td>
-                                                <td>{{ $item->user->nama_user }}</td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <a href="{{ route('admin.hasil.show', $item->id_responden) }}" class="btn btn-info btn-sm ml-2">
-                                                            <i class="far fa-eye"></i> Lihat Penilaian
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        @foreach($data_responden as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->kuesioner->first()->tgl_input }}</td>
+                                            <td>{{ $item->nama_responden }}</td>
+                                            <td>
+                                                <a href="{{ route('admin.hasil.show', $item->id_responden) }}" class="btn btn-info btn-sm ml-2">
+                                                    <i class="far fa-eye"></i> Lihat Penilaian
+                                                </a>
+                                            </td>
+                                        </tr>
                                         @endforeach
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -223,9 +221,8 @@
             loadJumlahResponden();
             loadHasilKuesioner();
         });
-
-
-        $('#basic-datatables').DataTable();
     });
+
+    $('#basic-datatables').DataTable();
 </script>
 @endpush

@@ -46,26 +46,32 @@ class HomeController extends Controller
     {
         $data_periode = Periode::where('tahun_periode', date('Y'))->first();
 
-        // $data_responden = $request->only([
-        //     'nama_responden',
-        //     'email',
-        //     'no_hp',
-        //     'jenis_kel',
-        //     'alamat',
-        // ]);
+        $data_responden = $request->only([
+            'nama_responden',
+            'email',
+            'no_hp',
+            'jenis_kel',
+            'alamat',
+        ]);
 
-        $data_responden = [
-            'id_user' => auth()->user()->id_user,
-            'id_periode' => $data_periode->id_periode,
-            'tgl_input' => date('Y-m-d')
-        ];
+        // $data_responden = [
+        //     'id_user' => auth()->user()->id_user,
+        //     'id_periode' => $data_periode->id_periode,
+        //     'tgl_input' => date('Y-m-d')
+        // ];
 
         $data_kuesioner = $request->except([
+            'nama_responden',
+            'email',
+            'no_hp',
+            'jenis_kel',
+            'alamat',
             'ulasan',
             '_token'
         ]);
 
-        $responden = Responden::create($data_responden);
+        $responden = Responden::create(array_merge($data_responden, ['status' => 'Aktif', 
+        'keterangan' => '']));
 
         foreach($data_kuesioner as $id_pertanyaan => $nilai) {
             $kuesioner = HasilKuesioner::create([

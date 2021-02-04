@@ -90,7 +90,6 @@
 
     <main id="main">
         <!-- ======= Beri Ulasan Section ======= -->
-        @if(Auth::check())
         <section id="beri-ulasan" class="contact">
             <div class="container">
 
@@ -102,7 +101,7 @@
                 <div class="row">
                     <div class="col-lg-12" data-aos="fade-up" data-aos-delay="0">
                             @csrf
-                            <!-- <div class="form-row">
+                            <div class="form-row">
                                 <div class="col-lg-6 form-group">
                                     <label for="name">Nama Lengkap</label>
                                     <input type="text" name="nama_responden" class="form-control" id="name"
@@ -119,14 +118,14 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-lg-8 form-group">
+                                <div class="col-lg-6 form-group">
                                     <label for="no_hp">Nomor Handphone</label>
                                     <input type="text" name="no_hp" class="form-control" id="name"
                                         placeholder="Nomor Handphone" data-rule="required"
                                         data-msg="Please provide valid phone number" />
                                     <div class="validate"></div>
                                 </div>
-                                <div class="col-lg-4 form-group">
+                                <div class="col-lg-6 form-group">
                                     <label for="name">Jenis Kelamin</label>
                                     <select name="jenis_kel" class="form-control" data-rule="required"
                                         data-msg="This field is required">
@@ -142,7 +141,7 @@
                                 <textarea class="form-control" name="alamat" rows="5" data-rule="required"
                                     data-msg="Please write something for us" placeholder="Alamat"></textarea>
                                 <div class="validate"></div>
-                            </div> -->
+                            </div>
 
                             <div class="section-title">
                                 <h2>Kuesioner</h2>
@@ -198,7 +197,7 @@
 
             </div>
         </section>
-        @else
+        <!--
         <section id="beri-ulasan" class="contact">
             <div class="container">
 
@@ -215,7 +214,6 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                                <!-- Form Login -->
                                 <div class="card login">
                                     <div class="card-body">
                                         <form method="POST" action="{{ route('login') }}">
@@ -257,10 +255,9 @@
                                         </form>
                                     </div>
                                 </div>
-                                <!-- End Form Login -->
                             </div>
+
                             <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-                                <!-- Form Register -->
                                 <div class="card cregister">
                                     <div class="card-body">
                                         <form method="POST" action="{{ route('user.responden.store') }}">
@@ -385,7 +382,6 @@
                                         </form>
                                     </div>
                                 </div>
-                                <!-- End Form Register -->
                             </div>
                         </div>
 
@@ -393,7 +389,7 @@
                 </div>
             </div>
         </section>
-        @endif
+        -->
         <!-- End Contact Us Section -->
 
     </main><!-- End #main -->

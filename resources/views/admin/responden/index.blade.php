@@ -39,10 +39,10 @@
                             @foreach($responden as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->user->nama_user }}</td>
-                                    <td>{{ $item->user->email }}</td>
-                                    <td>{{ $item->user->no_hp }}</td>
-                                    <td>{{ $item->user->jenis_kel }}</td>
+                                    <td>{{ $item->nama_responden }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->no_hp }}</td>
+                                    <td>{{ $item->jenis_kel }}</td>
                                     <!-- <td>
                                         <div class="btn-group">
                                         <a href="{{ route('admin.responden.edit', $item->id_responden) }}" class="btn btn-warning btn-sm ml-2">

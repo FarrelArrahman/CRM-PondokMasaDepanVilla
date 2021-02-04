@@ -28,13 +28,15 @@ class AlterTbResponden extends Migration
      */
     public function down()
     {
-        $table->string('nama_responden');
-        $table->string('email');
-        $table->string('no_hp');
-        $table->string('jenis_kel');
-        $table->string('alamat');
-        $table->string('status');
-        $table->string('keterangan');
-        $table->dropColumn(['id_user','id_periode','tgl_input']);
+        Schema::table('tb_responden', function ($table) {
+            $table->string('nama_responden');
+            $table->string('email');
+            $table->string('no_hp');
+            $table->string('jenis_kel');
+            $table->string('alamat');
+            $table->string('status');
+            $table->string('keterangan');
+            $table->dropColumn(['id_user','id_periode','tgl_input']);
+        });
     }
 }

@@ -4,18 +4,18 @@
             <li class="nav-item dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
-                        <img src="" alt="..." class="avatar-img rounded-circle">
+                        <img src="https://ui-avatars.com/api/?name={{ Auth::user()->nama_user ?? 'User' }}" alt="..." class="avatar-img rounded-circle">
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
                         <li>
                             <div class="user-box">
-                                <div class="avatar-lg"><img src="https://ui-avatars.com/api/?name={{ Auth::user()->nama ?? 'User' }}" alt="image profile"
+                                <div class="avatar-lg"><img src="https://ui-avatars.com/api/?name={{ Auth::user()->nama_user ?? 'User' }}" alt="image profile"
                                         class="avatar-img rounded"></div>
                                 <div class="u-text">
-                                    <h4>{{ Auth::user()->nama ?? 'Guest' }}</h4>
-                                    <p class="text-muted">{{ Auth::user()->nim ?? '-' }}</p>
+                                    <h4>{{ Auth::user()->nama_user ?? 'Guest' }}</h4>
+                                    <p class="text-muted">{{ Auth::user()->status ?? '-' }}</p>
                                 </div>
                             </div>
                         </li>

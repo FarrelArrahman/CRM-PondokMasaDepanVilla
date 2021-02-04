@@ -24,15 +24,15 @@
                     <table class="table">
                     <tr>
                         <th width="200">Nama Responden</th>
-                        <td>{{ $data_responden->user->nama_user }}</td>
+                        <td>{{ $data_responden->nama_responden }}</td>
                     </tr>
                     <tr>
                         <th width="200">Periode Kuesioner</th>
-                        <td>{{ $data_responden->periode->tahun_periode }}</td>
+                        <td>{{ $data_responden->kuesioner->first()->pertanyaan->periode->tahun_periode }}</td>
                     </tr>
                     <tr>
                         <th width="200">Rata-rata nilai</th>
-                        <td>{{ $nilai }}</td>
+                        <td>{{ round($nilai, 2) }}</td>
                     </tr>
                     <tr>
                         <th width="200">Ulasan responden</th>

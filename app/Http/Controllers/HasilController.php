@@ -8,6 +8,7 @@ use App\Models\Responden;
 use App\Models\HasilKuesioner;
 use App\Models\UlasanMasukan;
 use Auth;
+use DataTables;
 
 class HasilController extends Controller
 {
