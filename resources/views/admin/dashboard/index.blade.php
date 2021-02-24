@@ -17,10 +17,10 @@
     <div class="col-md-12">
         <div class="card full-height">
             <div class="card-body">
-                <div class="card-title">Dashboard</div>
-                <div class="card-category">Terdapat statistik mengenai total pertanyaan, responden, penilaian dan rating dari Villa Pondok Masa Depan.</div>
-                <div class="row mt-5">
-                    <div class="col-md-3">
+                <div class="card-category">Periode: </div>
+                <div class="card-title">{{ $periode_aktif->nama_periode }}</div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
                         <div class="card card-dark bg-primary2">
                             <div class="card-body bubble-shadow">
                                 <h5 class="op-8">Jumlah Responden</h5>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-4">
                         <div class="card card-dark bg-success2">
                             <div class="card-body bubble-shadow">
                                 <h5 class="op-8">Jumlah Pertanyaan</h5>
@@ -42,9 +42,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-4">
                         <div class="card card-dark bg-info2">
                             <div class="card-body bubble-shadow">
                                 <h5 class="op-8">Periode</h5>
@@ -54,9 +54,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="card card-dark bg-warning2">
                             <div class="card-body bubble-shadow">
                                 <h5 class="op-8">Rating</h5>

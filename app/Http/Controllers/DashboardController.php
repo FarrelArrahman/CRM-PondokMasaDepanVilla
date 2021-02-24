@@ -12,6 +12,8 @@ use Auth;
 
 class DashboardController extends Controller
 {
+    protected $periode_aktif;
+
     public function __construct()
     {
         // 
@@ -24,6 +26,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $periode = Periode::where('status', 1)->get();
+        $this->periode_aktif = Periode::latest('tgl_selesai')->first();
+
+        foreach($periode as $value) {
+            if(
+                date('Y-m-d', strtotime($value->tgl_mulai)) <= date('Y-m-d') && 
+                date('Y-m-d', strtotime($value->tgl_selesai)) >= date('Y-m-d')
+            ) {
+                $this->periode_aktif = $value;
+            }
+        }
+
         if(Auth::user()->status == 'responden')
         return redirect()->route('ulasan');
         
@@ -43,6 +57,7 @@ class DashboardController extends Controller
         ];
 
         return view('admin.dashboard.index', [
+            'periode_aktif' => $this->periode_aktif,
             'data_responden' => $data_responden,
             'data_pertanyaan' => $data_pertanyaan,
             'data_periode' => $data_periode,
@@ -78,8 +93,11 @@ class DashboardController extends Controller
 
     public function pertanyaan()
     {
-        $pertanyaan = Pertanyaan::whereHas('periode', function ($query) {
+        $periode_aktif = $this->periode_aktif;
+
+        $pertanyaan = Pertanyaan::whereHas('periode', function ($query) use ($periode_aktif) {
             $query->where('status', 1);
+            $query->where('id_periode', $periode_aktif->id_periode);
         })->get();
 
         return $pertanyaan;
@@ -87,7 +105,11 @@ class DashboardController extends Controller
 
     public function responden()
     {
-        $responden = Responden::with('kuesioner')->has('kuesioner')->get();
+        $pertanyaan = $this->pertanyaan()->pluck('id_pertanyaan');
+
+        $responden = Responden::with('kuesioner')->whereHas('kuesioner', function($query) use ($pertanyaan) {
+            $query->whereIn('id_pertanyaan', $pertanyaan);
+        })->get();
 
         return $responden;
     }

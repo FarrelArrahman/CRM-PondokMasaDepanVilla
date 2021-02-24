@@ -91,11 +91,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Halaman Utama</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Tentang Kami</a>
+                            <a class="nav-link" href="{{ route('home') }}">Halaman Utama</a>
                         </li>
                     </ul>
                 </div>

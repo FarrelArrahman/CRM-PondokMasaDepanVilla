@@ -12,6 +12,7 @@ class UlasanMasukan extends Model
     protected $table = 'tb_ulasan_masukan';
     protected $primaryKey = 'id_ulasan_masukan';
     public $timestamps = false;
+    protected $dates = ['tgl_input'];
 
     /**
      * The attributes that are mass assignable.

@@ -10,8 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="{{ asset('logo.jpg') }}" type="image/x-icon" />
 
     <!-- Google Fonts -->
     <link
@@ -56,10 +55,10 @@
         <i class="icofont-phone"></i> +1 5589 55488 55 -->
             </div>
             <div class="social-links float-right">
-                <a href="#" class="twitter"><i class="icofont-twitter text-white"></i></a>
-                <!-- <a href="#" class="facebook"><i class="icofont-facebook text-white"></i></a> -->
-                <a href="#" class="instagram"><i class="icofont-instagram text-white"></i></a>
-                <!-- <a href="#" class="skype"><i class="icofont-skype text-white"></i></a> -->
+                <!-- <a href="#" class="twitter"><i class="icofont-twitter text-white"></i></a> -->
+                <a href="https://www.instagram.com/pondokmasadepan_sidemen/" class="instagram"><i class="icofont-instagram text-white"></i></a>
+                <a href="https://www.facebook.com/" class="facebook"><i class="icofont-facebook text-white"></i></a>
+                <a href="mailto:pondokmasadepan1@gmail.com" class="email"><i class="icofont-email text-white"></i></a>
                 <!-- <a href="#" class="linkedin"><i class="icofont-linkedin text-white"></i></i></a> -->
             </div>
         </div>
@@ -70,7 +69,7 @@
         <div class="container">
 
             <div class="logo float-left text-center">
-                <h5 class="font-weight-bold text-uppercase"><a href="index.html"><span>Customer Relationship
+                <h5 class="font-weight-bold text-uppercase"><a href="{{ route('home') }}"><span>Customer Relationship
                             Management<br>Pondok Masa Depan Villa</span></a></h5>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -408,7 +407,11 @@
 
                     <div class="col-lg-6 col-md-12 footer-newsletter">
                         <h4>Alamat Villa</h4>
-                        <p>Jl.</p>
+                        <p>Desa Telaga Tawang, Kecamatan Sidemen, Kabupaten Karangasem</p>
+                        <h4>Telp</h4>
+                        <p>081236990526</p>
+                        <h4>Email</h4>
+                        <p>pondokmasadepan1@gmail.com</p>
                     </div>
 
                 </div>

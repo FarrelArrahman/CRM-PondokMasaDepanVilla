@@ -14,7 +14,7 @@ class PeriodeController extends Controller
      */
     public function index()
     {
-        $periode = Periode::all();
+        $periode = Periode::latest('tgl_selesai')->get();
         return view('admin.periode.index', [
             'periode' => $periode,
         ]);
@@ -47,6 +47,8 @@ class PeriodeController extends Controller
                 'status'        => 'required',
             ]
         );
+
+        $validated['id_user'] = auth()->user()->id_user;
         
         $periode = Periode::create($validated);
         return redirect()->route('admin.periode.index')->with(['message' => 'Data berhasil ditambahkan.', 'status' => 'success']);
@@ -92,6 +94,8 @@ class PeriodeController extends Controller
                 'status'        => 'required',
             ]
         );
+
+        $validated['id_user'] = auth()->user()->id_user;
 
         $periode->update($validated);
         return redirect()->route('admin.periode.index')->with(['message' => 'Data berhasil diubah.', 'status' => 'success']);

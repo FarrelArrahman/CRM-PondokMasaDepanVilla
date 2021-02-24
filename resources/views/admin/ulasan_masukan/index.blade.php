@@ -32,26 +32,26 @@
                                     <th>Ulasan atau Masukan</th>
                                     <th>Periode</th>
                                     <th>Tanggal Input</th>
-                                    <th>Keterangan</th>
-                                    <!-- <th>Aksi</th> -->
+                                    <!-- <th>Keterangan</th> -->
+                                    <th>Detail</th>
                                 </tr>
                             </thead>
                             <tbody>    
                             @foreach($ulasanMasukan as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->responden->user->nama_user }}</td>
+                                    <td>{{ $item->responden->nama_responden }}</td>
                                     <td>{{ $item->ulasan_masukan }}</td>
-                                    <td>{{ $item->periode->tahun_periode }}</td>
-                                    <td>{{ $item->tgl_input }}</td>
-                                    <td>{{ $item->keterangan }}</td>
-                                    <!-- <td>
+                                    <td>{{ $item->periode->nama_periode }}</td>
+                                    <td>{{ $item->tgl_input->isoFormat('D MMMM Y') }}</td>
+                                    <!-- <td>{{ $item->keterangan }}</td> -->
+                                    <td>
                                         <div class="btn-group">
-                                        <a href="{{ route('admin.ulasan.edit', $item->id_ulasan_masukan) }}" class="btn btn-warning btn-sm ml-2">
-                                            <i class="far fa-edit"></i>
+                                        <a href="{{ route('admin.hasil.show', $item->id_responden) }}" class="btn btn-info btn-sm ml-2">
+                                            <i class="far fa-eye"></i>
                                         </a>
                                         </div>
-                                    </td> -->
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

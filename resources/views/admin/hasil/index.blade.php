@@ -4,8 +4,7 @@
 <div class="page-inner py-5">
     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
         <div>
-            <h2 class="text-white pb-2 fw-bold">Dashboard</h2>
-            <h5 class="text-white op-7 mb-2">Selamat datang, <strong>{{ Auth::user()->nama ?? 'Guest' }}</strong></h5>
+            <h2 class="text-white pb-2 fw-bold">Hasil</h2>
         </div>
     </div>
 </div>
@@ -21,12 +20,13 @@
                 <div class="card-category">Informasi grafik pada Villa Pondok Masa Depan</div>
                 <div class="row mt-5">
                     <div class="col-md-12">
-                        <form action="" method="POST">
+                        <form>
+                            @csrf
                             <div class="form-inline pull-right">
                                 <label for="pilih-periode" class="mr-3">Pilih Periode</label>
-                                <select id="pilih-periode" class="form-control">
+                                <select name="periode" id="pilih-periode" class="form-control">
                                     @foreach($data_periode as $periode)
-                                    <option value="{{ $periode->tahun_periode }}">{{ $periode->tahun_periode }}</option>
+                                    <option value="{{ $periode->id_periode }}">{{ $periode->nama_periode }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -48,8 +48,9 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="jumlahresponden" role="tabpanel" aria-labelledby="jumlahresponden-tab">
                                 <div class="col-md-12 text-center">
-                                    <h3 class="text-center mb-0">Jumlah Responden</h3>
-                                    <small id="title-jumlah-responden" class="text-center mb-5"></small>
+                                    <button id="download-jumlah-responden" class="ml-3 btn btn-danger pull-right">Download Laporan</button>
+                                    <!-- <h3 class="text-center mb-0">Jumlah Responden</h3>
+                                    <small id="title-jumlah-responden" class="text-center mb-5"></small> -->
                                     <div id="container-jumlah-responden">
                                         <canvas id="canvas-jumlah-responden"></canvas>
                                     </div>
@@ -58,8 +59,9 @@
 
                             <div class="tab-pane fade" id="hasilkuesioner" role="tabpanel" aria-labelledby="hasilkuesioner-tab">
                                 <div class="col-md-12 text-center">
-                                    <h3 class="text-center mb-0">Hasil Kuesioner</h3>
-                                    <small id="title-hasil-kuesioner" class="text-center mb-5"></small>
+                                <button id="download-hasil-kuesioner" class="ml-3 btn btn-danger pull-right">Download Laporan</button>
+                                    <!-- <h3 class="text-center mb-0">Hasil Kuesioner</h3>
+                                    <small id="title-hasil-kuesioner" class="text-center mb-5"></small> -->
                                     <div id="container-hasil-kuesioner">
                                         <canvas id="canvas-hasil-kuesioner"></canvas>
                                     </div>
@@ -106,6 +108,7 @@
 @endsection
 
 @push('bottom')
+<script src="https://cdn.jsdelivr.net/npm/jspdf@1.5.3/dist/jspdf.min.js"></script>
 <script>
     var colorArray = [
         '#ef4723','#f68e1f','#fecc09','#7ebb42','#0f9246'
@@ -150,6 +153,9 @@
     }
 
     function setChartJumlahResponden(bulan, responden, max) {
+        var periode = $('#pilih-periode').val();
+        var periode_title = $('#pilih-periode :selected').text();
+        
         $('#canvas-jumlah-responden').remove(); // this is my <canvas> element
         $('#container-jumlah-responden').append('<canvas id="canvas-jumlah-responden"><canvas>');
         
@@ -159,7 +165,7 @@
                 label: "Responden",
                 backgroundColor: "#E74C3C",
                 data: responden
-            }]
+            }],
         };
 
         var canvas = document.getElementById('canvas-jumlah-responden');
@@ -175,12 +181,20 @@
                             max: max
                         }
                     }]
+                },
+                title: {
+                    display: true,
+                    text: ['Jumlah Responden','(' + periode_title + ')'],
+                    fontSize: 24,
                 }
             }
         });
     }
 
     function setChartHasilKuesioner(bulan, hasilKuesioner, max) {
+        var periode = $('#pilih-periode').val();
+        var periode_aktif = $('#pilih-periode :selected').text();
+
         $('#canvas-hasil-kuesioner').remove(); // this is my <canvas> element
         $('#container-hasil-kuesioner').append('<canvas id="canvas-hasil-kuesioner"><canvas>');
 
@@ -191,6 +205,13 @@
             data: {
                 labels: bulan,
                 datasets: [],
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: ['Hasil Kuesioner','(' + periode_aktif + ')'],
+                    fontSize: 24,
+                }
             }
         });
 
@@ -220,6 +241,36 @@
         $('#pilih-periode').change(function () {
             loadJumlahResponden();
             loadHasilKuesioner();
+        });
+
+        $('#download-jumlah-responden').click(function(e) {
+            e.preventDefault();
+            var periode = $('#pilih-periode').val();
+            var canvas = document.querySelector("#canvas-jumlah-responden");
+            var canvas_img = canvas.toDataURL("image/png",1.0); //JPEG will not match background color
+
+            var pdf = new jsPDF('landscape','in', 'letter'); //orientation, units, page size
+
+            pdf.addImage(canvas_img, 'png', .5, 1.75, 10, 5); //image, type, padding left, padding top, width, height
+            pdf.save('JumlahResponden' + periode + '-' + (+ new Date()) + '.pdf');
+            // pdf.autoPrint(); //print window automatically opened with pdf
+            // var blob = pdf.output("bloburl");
+            // window.open(blob);
+        });
+
+        $('#download-hasil-kuesioner').click(function(e) {
+            e.preventDefault();
+            var periode = $('#pilih-periode').val();
+            var canvas = document.querySelector("#canvas-hasil-kuesioner");
+            var canvas_img = canvas.toDataURL("image/png",1.0); //JPEG will not match background color
+
+            var pdf = new jsPDF('landscape','in', 'letter'); //orientation, units, page size
+
+            pdf.addImage(canvas_img, 'png', .5, 1.75, 10, 5); //image, type, padding left, padding top, width, height
+            pdf.save('HasilKuesioner' + periode + '-' + (+ new Date()) + '.pdf');
+            // pdf.autoPrint(); //print window automatically opened with pdf
+            // var blob = pdf.output("bloburl");
+            // window.open(blob);
         });
     });
 

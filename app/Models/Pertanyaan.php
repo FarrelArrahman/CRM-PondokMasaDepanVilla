@@ -12,6 +12,7 @@ class Pertanyaan extends Model
     protected $table = 'tb_pertanyaan';
     protected $primaryKey = 'id_pertanyaan';
     public $timestamps = false;
+    protected $dates = ['tgl_input'];
 
     /**
      * The attributes that are mass assignable.

@@ -42,10 +42,10 @@
                                 @foreach($pertanyaan as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->periode->tahun_periode }}</td>
+                                    <td>{{ $item->periode->nama_periode }}</td>
                                     <td>{{ $item->pertanyaan }}</td>
                                     <td>{{ $item->user->nama_user }}</td>
-                                    <td>{{ $item->tgl_input }}</td>
+                                    <td>{{ $item->tgl_input->isoFormat('D MMMM Y') }}</td>
                                     <td>
                                         <div class="btn-group">
                                         <a href="{{ route('admin.pertanyaan.edit', $item->id_pertanyaan) }}" class="btn btn-warning btn-sm ml-2">

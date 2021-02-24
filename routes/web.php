@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // API
+Route::get('/get-bulan/{periode}', [App\Http\Controllers\HasilController::class, 'getBulan'])->name('get-bulan');
 Route::get('/get-responden/{periode}', [App\Http\Controllers\HasilController::class, 'responden'])->name('get-responden');
 Route::get('/get-nilai/{periode}', [App\Http\Controllers\HasilController::class, 'nilai'])->name('get-nilai');
 Route::get('/datatable-responden/{periode}', [App\Http\Controllers\HasilController::class, 'datatableResponden'])->name('datatable.responden');
@@ -26,6 +27,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
         Route::resource('ulasan', App\Http\Controllers\UlasanMasukanController::class);
         Route::get('hasil', [App\Http\Controllers\HasilController::class, 'index'])->name('hasil.index');
         Route::get('hasil/{id_responden}', [App\Http\Controllers\HasilController::class, 'show'])->name('hasil.show');
+        // Cetak Laporan
+        Route::get('hasil/pdf/{id}', [App\Http\Controllers\HasilController::class, 'pdf'])->name('hasil.pdf');
+
     });
 
     Route::middleware('checkrole:admin')->group(function () {

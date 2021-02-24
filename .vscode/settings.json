@@ -1,0 +1,10 @@
+{
+    "mssql.connections": [
+        // {
+        //     "server": "",
+        //     "database": "",
+        //     "user": "",
+        //     "password": "",
+        // }
+    ]
+}

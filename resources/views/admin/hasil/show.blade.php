@@ -20,6 +20,9 @@
     <div class="col-md-12">
         <div class="card full-height">
             <div class="card-body">
+                <form action="{{ route('admin.hasil.pdf', $data_responden->id_responden) }}">
+                    <button type="submit" class="ml-3 btn btn-danger pull-right">Download Laporan</button>
+                </form>
                 <div class="card-body">
                     <table class="table">
                     <tr>

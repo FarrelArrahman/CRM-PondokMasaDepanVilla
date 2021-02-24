@@ -22,6 +22,7 @@ class Periode extends Model
     protected $fillable = [
         'nama_periode',
         'tahun_periode',
+        'id_user',
         'tgl_mulai',
         'tgl_selesai',
         'status'

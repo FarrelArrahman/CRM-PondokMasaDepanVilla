@@ -10,8 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="{{ asset('logo.jpg') }}" type="image/x-icon" />
 
     <!-- Google Fonts -->
     <link
@@ -29,6 +28,14 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('mamba/assets/css/style.css') }}" rel="stylesheet">
+
+    <style>
+        .img-slider {
+            width: 400px;
+            height: 360px;
+            object-fit: cover;
+        }
+    </style>
 
     <!-- =======================================================
   * Template Name: Mamba - v2.5.0
@@ -48,10 +55,10 @@
         <i class="icofont-phone"></i> +1 5589 55488 55 -->
             </div>
             <div class="social-links float-right">
-                <a href="#" class="twitter"><i class="icofont-twitter text-white"></i></a>
-                <!-- <a href="#" class="facebook"><i class="icofont-facebook text-white"></i></a> -->
-                <a href="#" class="instagram"><i class="icofont-instagram text-white"></i></a>
-                <!-- <a href="#" class="skype"><i class="icofont-skype text-white"></i></a> -->
+                <!-- <a href="#" class="twitter"><i class="icofont-twitter text-white"></i></a> -->
+                <a href="https://www.instagram.com/pondokmasadepan_sidemen/" class="instagram"><i class="icofont-instagram text-white"></i></a>
+                <a href="https://www.facebook.com/" class="facebook"><i class="icofont-facebook text-white"></i></a>
+                <a href="mailto:pondokmasadepan1@gmail.com" class="email"><i class="icofont-email text-white"></i></a>
                 <!-- <a href="#" class="linkedin"><i class="icofont-linkedin text-white"></i></i></a> -->
             </div>
         </div>
@@ -62,7 +69,7 @@
         <div class="container">
 
             <div class="logo float-left text-center">
-                <h5 class="font-weight-bold text-uppercase"><a href="index.html"><span>Customer Relationship
+                <h5 class="font-weight-bold text-uppercase"><a href="{{ route('home') }}"><span>Customer Relationship
                             Management<br>Pondok Masa Depan Villa</span></a></h5>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -93,28 +100,25 @@
         <div class="hero-container">
             <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
 
-                <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+                <!-- <ol class="carousel-indicators" id="hero-carousel-indicators"></ol> -->
 
                 <div class="carousel-inner" role="listbox">
 
                     <!-- Slide 1 -->
                     <div class="carousel-item active"
-                        style="background-image: url('mamba/assets/img/slide/slide-1.jpg');">
+                        style="background-image: url('slider/3.jpeg');">
                         <div class="carousel-container">
                             <div class="carousel-content container">
-                                <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Mamba</span></h2>
-                                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui
-                                    aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem
-                                    mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti
-                                    vel. Minus et tempore modi architecto.</p>
-                                <a href="#tentang-kami"
-                                    class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                                <h2 class="animate__animated animate__fadeInDown">Selamat datang di <br>Pondok Masa Depan Villa</h2>
+                                <p class="animate__animated animate__fadeInUp">Nikmati suasana yang indah dan nyaman menginap di villa sembari mengenal budaya Bali.</p>
+                                <!-- <a href="#tentang-kami"
+                                    class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a> -->
                             </div>
                         </div>
                     </div>
 
                     <!-- Slide 2 -->
-                    <div class="carousel-item" style="background-image: url('mamba/assets/img/slide/slide-2.jpg');">
+                    <!-- <div class="carousel-item" style="background-image: url('mamba/assets/img/slide/slide-2.jpg');">
                         <div class="carousel-container">
                             <div class="carousel-content container">
                                 <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
@@ -126,10 +130,10 @@
                                     class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Slide 3 -->
-                    <div class="carousel-item" style="background-image: url('mamba/assets/img/slide/slide-3.jpg');">
+                    <!-- <div class="carousel-item" style="background-image: url('mamba/assets/img/slide/slide-3.jpg');">
                         <div class="carousel-container">
                             <div class="carousel-content container">
                                 <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
@@ -141,18 +145,18 @@
                                     class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
 
-                <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+                <!-- <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon icofont-rounded-left" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
                 <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
                     <span class="carousel-control-next-icon icofont-rounded-right" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
-                </a>
+                </a> -->
 
             </div>
         </div>
@@ -161,22 +165,57 @@
     <main id="main">
 
         <!-- ======= Tentang Kami Section ======= -->
-        <!-- <section id="tentang-kami" class="about">
+        <section id="tentang-kami" class="about">
             <div class="container">
 
                 <div class="row no-gutters">
                     <div class="col-lg-6 video-box">
-                        <img src="assets/img/about.jpg" class="img-fluid" alt="">
-                        <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4"
-                            data-vbtype="video" data-autoplay="true"></a>
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <!-- <div class="carousel-item active">
+                                    <img class="d-block w-100 img-slider" src="{{ asset('slider/1.jpeg') }}" alt="">
+                                </div> -->
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100 img-slider" src="{{ asset('slider/2.jpeg') }}" alt="">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 img-slider" src="{{ asset('slider/3.jpeg') }}" alt="">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 img-slider" src="{{ asset('slider/4.jpeg') }}" alt="">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 img-slider" src="{{ asset('slider/5.jpeg') }}" alt="">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 img-slider" src="{{ asset('slider/6.jpeg') }}" alt="">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 img-slider" src="{{ asset('slider/7.jpeg') }}" alt="">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 img-slider" src="{{ asset('slider/8.jpeg') }}" alt="">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 img-slider" src="{{ asset('slider/9.jpeg') }}" alt="">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="col-lg-6 d-flex flex-column justify-content-center about-content">
 
                         <div class="section-title">
-                            <h2>Our Story About Pondok Masa Depan Villa</h2>
-                            <p>Pondok Masa Depan beroperasi mulai Tahun 2018, dan sudah berdiri sejak 19 September.
-                                Didirikan oleh pasangan suami istri I Gusti Ayu Rasmini dan I Gusti lanang Ngurah ...
+                            <h2>Pondok Masa Depan Villa</h2>
+                            <p>Pondok Masa Depan Villa Merupakan Salah Satu Penyedia Jasa Akomodasi Yang Telah Berdiri Sejak Tahun 2018 Dan Berlokasi Di Kecamatan Sidemen, Kabupaten Karangasem. Sebagian Besar Pengunjung Dari Pondok Masa Depan Villa Adalah Wisatawan Mancanegara Yang Ingin Mengetahui Lebih Banyak Mengenai Budaya Bali. Selain Dapat Menginap, Pengunjung Juga Dapat Menikmati Berbagai Program Aktifitas Yang Dikelola Pihak Pondok Masa Depan Villa.
                             </p>
                         </div>
 
@@ -184,7 +223,7 @@
                 </div>
 
             </div>
-        </section> -->
+        </section>
         <!-- End About Us Section -->
 
         <!-- ======= Aktifitas Section ======= -->
@@ -290,7 +329,11 @@
 
                     <div class="col-lg-6 col-md-12 footer-newsletter">
                         <h4>Alamat Villa</h4>
-                        <p>Jl.</p>
+                        <p>Desa Telaga Tawang, Kecamatan Sidemen, Kabupaten Karangasem</p>
+                        <h4>Telp</h4>
+                        <p>081236990526</p>
+                        <h4>Email</h4>
+                        <p>pondokmasadepan1@gmail.com</p>
                     </div>
 
                 </div>
