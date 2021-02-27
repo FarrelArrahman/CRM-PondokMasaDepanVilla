@@ -29,6 +29,11 @@
             <td>{{ $data_responden->kuesioner->first()->pertanyaan->periode->tahun_periode }}</td>
         </tr>
         <tr>
+            <th align="left" width="100">Tanggal Input</th>
+            <td width="10">:</td>
+            <td>{{ $data_responden->ulasan->tgl_input->isoFormat('dddd, D MMMM Y') }}</td>
+        </tr>
+        <tr>
             <th align="left" width="100">Rata-rata nilai</th>
             <td width="10">:</td>
             <td>{{ round($nilai, 2) }}</td>

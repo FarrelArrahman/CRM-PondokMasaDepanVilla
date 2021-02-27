@@ -17,7 +17,7 @@ class PertanyaanController extends Controller
     {
         $pertanyaan = Pertanyaan::whereHas('periode', function ($query) {
             return $query->where('status', '1');
-        })->get();
+        })->latest('tgl_input')->get();
 
         return view('admin.pertanyaan.index', [
             'pertanyaan' => $pertanyaan

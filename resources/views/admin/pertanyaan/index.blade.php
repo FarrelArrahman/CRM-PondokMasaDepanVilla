@@ -51,13 +51,13 @@
                                         <a href="{{ route('admin.pertanyaan.edit', $item->id_pertanyaan) }}" class="btn btn-warning btn-sm ml-2">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('admin.pertanyaan.destroy', $item->id_pertanyaan) }}" method="post">
+                                        <!-- <form action="{{ route('admin.pertanyaan.destroy', $item->id_pertanyaan) }}" method="post">
                                             @method('delete')
                                             @csrf
                                             <button class="btn btn-danger btn-sm ml-2" style="margin-right: 5px;"
                                                 onclick="return confirm('Apakah yakin ingin menghapus?');"><i
                                                     class="far fa-trash-alt"></i></button>
-                                        </form>
+                                        </form> -->
                                         </div>
                                     </td>
                                 </tr>

@@ -31,7 +31,11 @@
                     </tr>
                     <tr>
                         <th width="200">Periode Kuesioner</th>
-                        <td>{{ $data_responden->kuesioner->first()->pertanyaan->periode->tahun_periode }}</td>
+                        <td>{{ $data_responden->kuesioner->first()->pertanyaan->periode->nama_periode }}</td>
+                    </tr>
+                    <tr>
+                        <th width="200">Tanggal Input</th>
+                        <td>{{ $data_responden->ulasan->tgl_input->isoFormat('dddd, D MMMM Y') }}</td>
                     </tr>
                     <tr>
                         <th width="200">Rata-rata nilai</th>

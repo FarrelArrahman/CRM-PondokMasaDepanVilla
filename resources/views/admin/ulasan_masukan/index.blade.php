@@ -30,8 +30,8 @@
                                     <th>#</th>
                                     <th>Nama Responden</th>
                                     <th>Ulasan atau Masukan</th>
-                                    <th>Periode</th>
-                                    <th>Tanggal Input</th>
+                                    <!-- <th>Periode</th> -->
+                                    <!-- <th>Tanggal Input</th> -->
                                     <!-- <th>Keterangan</th> -->
                                     <th>Detail</th>
                                 </tr>
@@ -42,8 +42,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->responden->nama_responden }}</td>
                                     <td>{{ $item->ulasan_masukan }}</td>
-                                    <td>{{ $item->periode->nama_periode }}</td>
-                                    <td>{{ $item->tgl_input->isoFormat('D MMMM Y') }}</td>
+                                    <!-- <td>{{ $item->periode->nama_periode }}</td> -->
+                                    <!-- <td>{{ $item->tgl_input->isoFormat('D MMMM Y') }}</td> -->
                                     <!-- <td>{{ $item->keterangan }}</td> -->
                                     <td>
                                         <div class="btn-group">
