@@ -104,15 +104,13 @@
                                 <div class="col-lg-6 form-group">
                                     <label for="name">Nama Lengkap</label>
                                     <input type="text" name="nama_responden" class="form-control" id="name"
-                                        placeholder="Nama Lengkap" data-rule="required"
-                                        data-msg="Please enter at least 4 chars" />
+                                        placeholder="Nama Lengkap" required>
                                     <div class="validate"></div>
                                 </div>
                                 <div class="col-lg-6 form-group">
                                     <label for="name">Email</label>
                                     <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Email" data-rule="email"
-                                        data-msg="Please enter a valid email" />
+                                        placeholder="Email" required>
                                     <div class="validate"></div>
                                 </div>
                             </div>
@@ -120,14 +118,12 @@
                                 <div class="col-lg-6 form-group">
                                     <label for="no_hp">Nomor Handphone</label>
                                     <input type="text" name="no_hp" class="form-control" id="name"
-                                        placeholder="Nomor Handphone" data-rule="required"
-                                        data-msg="Please provide valid phone number" />
+                                        placeholder="Nomor Handphone" required>
                                     <div class="validate"></div>
                                 </div>
                                 <div class="col-lg-6 form-group">
                                     <label for="name">Jenis Kelamin</label>
-                                    <select name="jenis_kel" class="form-control" data-rule="required"
-                                        data-msg="This field is required">
+                                    <select name="jenis_kel" class="form-control" required>
                                         <option value="" selected disabled>Pilih Salah Satu...</option>
                                         <option value="L">Laki-laki</option>
                                         <option value="P">Perempuan</option>
@@ -137,8 +133,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
-                                <textarea class="form-control" name="alamat" rows="5" data-rule="required"
-                                    data-msg="Please write something for us" placeholder="Alamat"></textarea>
+                                <textarea class="form-control" name="alamat" rows="5" required placeholder="Alamat"></textarea>
                                 <div class="validate"></div>
                             </div>
 
@@ -167,7 +162,7 @@
                                         <td>{{ $item->pertanyaan }}</td>
                                         @for($i = 5; $i >= 1; $i--)
                                         <td class="text-center">
-                                            <input type="radio" class="form-control" name="{{ $item->id_pertanyaan }}" value="{{ $i }}">
+                                            <input type="radio" class="form-control" name="{{ $item->id_pertanyaan }}" value="{{ $i }}" required>
                                         </td>
                                         @endfor
                                     </tr>
@@ -180,8 +175,7 @@
                             </div>
 
                             <div class="form-group">
-                                <textarea class="form-control" name="ulasan" rows="5" data-rule="required"
-                                    data-msg="Please write something for us" placeholder="Beri Ulasan..."></textarea>
+                                <textarea class="form-control" name="ulasan" rows="5" required placeholder="Beri Ulasan..."></textarea>
                                 <div class="validate"></div>
                             </div>
 

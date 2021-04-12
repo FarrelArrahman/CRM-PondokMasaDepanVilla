@@ -33,7 +33,7 @@
                             <label for="inlineinput" class="col-md-2 col-form-label">Tahun Periode</label>
                             <div class="col-md-10 p-0">
                                 <select name="tahun_periode" class="form-control input-full">
-                                    @for($i = 2016; $i <= date('Y'); $i++)
+                                    @for($i = date('Y') + 5; $i >= 2017; $i--)
                                         <option @if($periode->tahun_periode == $i) {{ 'selected' }} @endif value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                                 </select>

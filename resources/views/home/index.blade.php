@@ -57,7 +57,7 @@
             <div class="social-links float-right">
                 <!-- <a href="#" class="twitter"><i class="icofont-twitter text-white"></i></a> -->
                 <a href="https://www.instagram.com/pondokmasadepan_sidemen/" class="instagram"><i class="icofont-instagram text-white"></i></a>
-                <a href="https://www.facebook.com/" class="facebook"><i class="icofont-facebook text-white"></i></a>
+                <a href="https://www.facebook.com/rasmini.de/" class="facebook"><i class="icofont-facebook text-white"></i></a>
                 <a href="mailto:pondokmasadepan1@gmail.com" class="email"><i class="icofont-email text-white"></i></a>
                 <!-- <a href="#" class="linkedin"><i class="icofont-linkedin text-white"></i></i></a> -->
             </div>

@@ -29,7 +29,7 @@
                                 <select name="id_periode" class="form-control input-full" id="inlineinput">
                                     <option value="" disabled selected>Pilih periode...</option>
                                     @foreach($periode as $item)
-                                    <option value="{{ $item->id_periode }}">{{ $item->tahun_periode }}</option>
+                                    <option value="{{ $item->id_periode }}">{{ $item->nama_periode }}</option>
                                     @endforeach
                                 </select>
                             </div>

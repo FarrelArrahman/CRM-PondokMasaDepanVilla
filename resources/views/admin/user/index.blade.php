@@ -46,7 +46,7 @@
                                     <td>{{ $item->nama_user }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->no_hp }}</td>
-                                    <td>{{ $item->jenis_kel }}</td>
+                                    <td>{{ $item->jenis_kel == "L" ? "Laki-laki" : "Perempuan" }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td>
                                         <div class="btn-group">
