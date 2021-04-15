@@ -30,6 +30,10 @@
                         <td>{{ $data_responden->nama_responden }}</td>
                     </tr>
                     <tr>
+                        <th width="200">Pekerjaan</th>
+                        <td>{{ $data_responden->keterangan == '' ? '-' : $data_responden->keterangan }}</td>
+                    </tr>
+                    <tr>
                         <th width="200">Periode Kuesioner</th>
                         <td>{{ $data_responden->kuesioner->first()->pertanyaan->periode->nama_periode }}</td>
                     </tr>

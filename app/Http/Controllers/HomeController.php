@@ -52,6 +52,7 @@ class HomeController extends Controller
             'no_hp',
             'jenis_kel',
             'alamat',
+            'keterangan',
         ]);
 
         // $data_responden = [
@@ -67,11 +68,11 @@ class HomeController extends Controller
             'jenis_kel',
             'alamat',
             'ulasan',
+            'keterangan',
             '_token'
         ]);
 
-        $responden = Responden::create(array_merge($data_responden, ['status' => 'Aktif', 
-        'keterangan' => '']));
+        $responden = Responden::create(array_merge($data_responden, ['status' => 'Aktif']));
 
         foreach($data_kuesioner as $id_pertanyaan => $nilai) {
             $kuesioner = HasilKuesioner::create([

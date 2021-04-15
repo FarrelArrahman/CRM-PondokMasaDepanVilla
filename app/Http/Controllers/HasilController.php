@@ -25,9 +25,15 @@ class HasilController extends Controller
 
         // return $this->getPenilaianPertanyaan(Pertanyaan::findOrFail(12));
         foreach($data_pertanyaan as $key => $value) {
+            $labels = [];
+            $bulan = $this->getBulan($value->periode);
+            foreach($bulan as $item) {
+                $labels[] = $item;
+            }
+
             $value['data'] =
             [
-                'labels'    => $this->getBulan($value->periode),
+                'labels'    => $labels,
                 'datasets'  => $this->getPenilaianPertanyaan($value)
             ];
         }
