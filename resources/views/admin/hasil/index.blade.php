@@ -338,7 +338,20 @@
             // window.open(blob);
         });
 
+        $('#download-penilaian-pertanyaan').click(function(e) {
+            e.preventDefault();
+            var periode = $('#pilih-periode').val();
+            var canvas = document.querySelector("#penilaianpertanyaan");
+            var canvas_img = canvas.toDataURL("image/png",1.0); //JPEG will not match background color
 
+            var pdf = new jsPDF('landscape','in', 'letter'); //orientation, units, page size
+
+            pdf.addImage(canvas_img, 'png', .5, 1.75, 10, 5); //image, type, padding left, padding top, width, height
+            pdf.save('HasilKuesioner' + periode + '-' + (+ new Date()) + '.pdf');
+            // pdf.autoPrint(); //print window automatically opened with pdf
+            // var blob = pdf.output("bloburl");
+            // window.open(blob);
+        });
     });
 
     $('#basic-datatables').DataTable();

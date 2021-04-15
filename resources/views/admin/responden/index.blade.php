@@ -31,6 +31,7 @@
                                     <th>Nama Responden</th>
                                     <th>Email</th>
                                     <th>No Hp</th>
+                                    <th>Pekerjaan</th>
                                     <th>Jenis Kelamin</th>
                                     <!-- <th>Aksi</th> -->
                                 </tr>
@@ -42,6 +43,7 @@
                                     <td>{{ $item->nama_responden }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->no_hp }}</td>
+                                    <td>{{ $item->keterangan == '' ? '-' : $item->keterangan }}</td>
                                     <td>{{ $item->jenis_kel == "L" ? "Laki-laki" : "Perempuan" }}</td>
                                     <!-- <td>
                                         <div class="btn-group">
