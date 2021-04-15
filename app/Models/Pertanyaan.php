@@ -53,4 +53,9 @@ class Pertanyaan extends Model
     {
         return $this->hasOne(User::class, 'id_user', 'id_user');
     }
+
+    public function hasilKuesioner()
+    {
+        return $this->belongsTo(HasilKuesioner::class, 'id_pertanyaan', 'id_pertanyaan');
+    }
 }

@@ -7,6 +7,7 @@ use App\Models\Periode;
 use App\Models\Responden;
 use App\Models\HasilKuesioner;
 use App\Models\UlasanMasukan;
+use App\Models\Pertanyaan;
 use Auth;
 use PDF;
 use Carbon\Carbon;
@@ -20,9 +21,23 @@ class HasilController extends Controller
 
         $data_responden = Responden::all();
 
+        $data_pertanyaan = Pertanyaan::all();
+
+        // return $this->getPenilaianPertanyaan(Pertanyaan::findOrFail(12));
+        foreach($data_pertanyaan as $key => $value) {
+            $value['data'] =
+            [
+                'labels'    => $this->getBulan($value->periode),
+                'datasets'  => $this->getPenilaianPertanyaan($value)
+            ];
+        }
+
+        // return $data_pertanyaan;
+
         return view('admin.hasil.index', [
             'data_periode' => $data_periode,
             'data_responden' => $data_responden,
+            'data_pertanyaan' => $data_pertanyaan,
         ]);
     }
 
@@ -40,6 +55,30 @@ class HasilController extends Controller
             'data_responden' => $data_responden,
             'nilai' => $nilai
         ]);
+    }
+
+    public function getPenilaianPertanyaan(Pertanyaan $pertanyaan)
+    {
+        $bulan = $this->getBulan($pertanyaan->periode);
+        $datasets = [];
+        $colorArray = [
+            '#ef4723','#f68e1f','#fecc09','#7ebb42','#0f9246'
+        ];
+        $hasilKuesioner = HasilKuesioner::all();
+
+        for($i = 5; $i > 0; $i--) {
+            $datasets[$i]['label'] = $i;
+            $datasets[$i]['borderColor'] = $colorArray[$i-1];
+            foreach($bulan as $key => $value) {
+                $datasets[$i]['data'][] = HasilKuesioner::where('nilai', $i)
+                    ->where('id_pertanyaan', $pertanyaan->id_pertanyaan)
+                    ->whereMonth('tgl_input', $key)
+                    ->count();
+            }
+            $datasets[$i]['fill'] = false;
+        }
+
+        return $datasets;
     }
 
     public function getBulan(Periode $periode)

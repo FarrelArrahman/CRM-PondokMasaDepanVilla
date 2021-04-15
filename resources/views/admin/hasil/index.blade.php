@@ -44,6 +44,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="penilaianresponden-tab" data-toggle="tab" href="#penilaianresponden" role="tab" aria-controls="penilaianresponden" aria-selected="false">Penilaian Responden</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="penilaianpertanyaan-tab" data-toggle="tab" href="#penilaianpertanyaan" role="tab" aria-controls="penilaianpertanyaan" aria-selected="false">Penilaian Pertanyaan</a>
+                            </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="jumlahresponden" role="tabpanel" aria-labelledby="jumlahresponden-tab">
@@ -95,6 +98,26 @@
                                         @endforeach
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="penilaianpertanyaan" role="tabpanel" aria-labelledby="penilaianpertanyaan-tab">
+                                <div class="col-md-12">
+                                    <h3 class="text-center mb-0">Penilaian Pertanyaan</h3>
+                                    @foreach($data_pertanyaan as $item)
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="card-title">
+                                                <a data-toggle="collapse" href="#collapse{{$loop->iteration}}">{{ $item->pertanyaan }}</a>
+                                            </div>
+                                            <div id="collapse{{$loop->iteration}}" class="panel-collapse collapse show">
+                                                <div class="container-penilaian-pertanyaan" data-id="{{$loop->iteration}}" id="container-penilaian-pertanyaan{{$loop->iteration}}">
+                                                    <canvas class="canvas-penilaian-pertanyaan" data-id="{{$loop->iteration}}" data-datasets='{{ json_encode($item->data) }}' id="canvas-penilaian-pertanyaan{{$loop->iteration}}"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -150,6 +173,47 @@
                 console.log(e);
             });
             
+    }
+
+    function loadPenilaianPertanyaan() {
+        var el = [...document.getElementsByClassName("canvas-penilaian-pertanyaan")];
+        var canvases = [];
+        var test = function(item, index, arr) {
+            // console.log(item.dataset.datasets);
+            // setPenilaianPertanyaan(item.id, item.dataset.datasets);
+            canvases.push(item);
+        }
+        el.forEach(test);
+        // console.log(canvases);
+        canvases.forEach(function(item) {
+            setPenilaianPertanyaan(item.id, JSON.parse(item.dataset.datasets));
+        });
+    }
+
+    function setPenilaianPertanyaan(id, dt) {
+        var labels = Object.values(dt.labels);
+        var datasets = Object.values(dt.datasets);
+        console.log(datasets);
+        var ctx = document.getElementById(id).getContext("2d");
+
+        var myBarChart = new Chart(ctx, {
+            type: 'line',
+            // data: data,
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                barValueSpacing: 20,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          min: 0,
+                        }
+                    }]
+                }
+            }
+        });
     }
 
     function setChartJumlahResponden(bulan, responden, max) {
@@ -237,6 +301,7 @@
     $(document).ready(function () {
         loadJumlahResponden();
         loadHasilKuesioner();
+        loadPenilaianPertanyaan();
         
         $('#pilih-periode').change(function () {
             loadJumlahResponden();
@@ -272,6 +337,8 @@
             // var blob = pdf.output("bloburl");
             // window.open(blob);
         });
+
+
     });
 
     $('#basic-datatables').DataTable();
