@@ -28,11 +28,15 @@ class HomeController extends Controller
      */
     public function ulasan()
     {
+        // untuk tambahin listnya, ikutin format yang ada di bawah ini yaa
+        // 'Nama Pekerjaan',
+        // jangan lupa tanda petiknya di awal dan akhir
+        // sama tanda koma setelah tanda petik akhir
         $pekerjaan = [
             'Pegawai Swasta',
             'Dokter',
             'Pegawai Negeri Sipil',
-            //
+            // masukin list barunya di sini
         ];
 
         $pertanyaan = Pertanyaan::whereHas('periode', function ($query) {
