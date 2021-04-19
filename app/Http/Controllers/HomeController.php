@@ -28,11 +28,19 @@ class HomeController extends Controller
      */
     public function ulasan()
     {
+        $pekerjaan = [
+            'Pegawai Swasta',
+            'Dokter',
+            'Pegawai Negeri Sipil',
+            //
+        ];
+
         $pertanyaan = Pertanyaan::whereHas('periode', function ($query) {
             return $query->where('tahun_periode', date('Y'));
         })->get();
 
         return view('home.ulasan', [
+            'pekerjaan' => $pekerjaan,
             'pertanyaan' => $pertanyaan,
         ]);
     }

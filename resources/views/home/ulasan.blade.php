@@ -29,6 +29,9 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('mamba/assets/css/style.css') }}" rel="stylesheet">
 
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- =======================================================
   * Template Name: Mamba - v2.5.0
   * Template URL: https://bootstrapmade.com/mamba-one-page-bootstrap-template-free/
@@ -133,7 +136,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="pekerjaan">Pekerjaan</label>
-                                <input type="text" class="form-control" name="keterangan" required placeholder="Pekerjaan"></input>
+                                <select class="form-control select2" name="pekerjaan" required>
+                                    <option value="" disabled="" selected="">-- Pilih Pekerjaan --</option>
+                                    @foreach($pekerjaan as $item)
+                                    <option value="{{ $item }}">{{ $item }}</option>
+                                    @endforeach
+                                </select>
                                 <div class="validate"></div>
                             </div>
                             <div class="form-group">
@@ -451,7 +459,12 @@
     <!-- Sweetalert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <!-- Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
+        $('.select2').select2();
+
         @if(Session::has('message'))
             swal("Berhasil", "{{ Session::get('message') }}", "{{ Session::get('status') }}");
         @endif
